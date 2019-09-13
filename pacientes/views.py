@@ -23,6 +23,7 @@ def declaracaodesaude(request):
             print (request.POST)
             print ("passou por aqui")
             if form.is_valid():
+                print('formulario valido')
                 declaracao = form.save(commit=False)
                 declaracao.created_by = request.user
                 declaracao.save()
