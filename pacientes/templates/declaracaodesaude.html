@@ -1,0 +1,414 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+
+{% block content %}
+<div class="row mt-5 justify-content-md-center">
+        <div class="col-m10">
+            <form method="POST"> {% csrf_token %}
+                <table class="table table-hover table-bordered" style="font-size: 18px;">
+                    <tbody>
+                        <tr>
+                            <th scope="row">01)</th>
+                            <td>Tem ou teve asma ou bronquite?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="ans01" id="id_ans01" value=True autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="ans01" id="id_ans01" value=False autocomplete="off">Não
+                                </label>
+                                </div>
+
+              
+                               
+                            </td>
+                        <tr>
+                        <tr>
+                            <th scope="row">02)</th>
+                            <td>Tem ou teve miopia, hipermetropia ou astigmatismo?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="ans02" id="id_ans02" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="ans02" id="id_ans02" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">03)</th>
+                            <td>Tem ou teve estrabismo, catarata ceratocone, glaucoma, lesões da retina córnea?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">04)</th>
+                            <td>Tem ou teve sinusite, desvio septo, hipermetrofia das amígdalas, adenóide ou doença do ronco? Tem indicação cirúrgica?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">05)</th>
+                            <td>Tem ou teve epilepsia, convulsão ou enxaqueca?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">06)</th>
+                            <td>Tem ou teve doença neurológica, do labirinto, derrame, Alzheimer, Parkinson, paralisia cerebral ou outra?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">07)</th>
+                            <td>Tem ou teve varizes?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">08)</th>
+                            <td>Tem ou teve pressão alta, infarto, angina, arritmias, aneurismas, trombose, embolia? Possui marca passo? Stent?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">09)</th>
+                            <td>Tem ou teve doença do sangue (anemia, hemofilia, púrpura ou outra)?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">10)</th>
+                            <td>Tem ou teve Diabetes?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">11)</th>
+                            <td>Tem ou teve doença de Rim(insuficiência renal, cálculo, infecção urinária de repetição, transplante ou outra)? Faz ou fez diálise ou hemodiálise?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">12)</th>
+                            <td>Tem fimose, hidrocele, variocele, testículos não descidos (criptorquídia)?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">13)</th>
+                            <td>Tem ou teve úclera, refluxo gastroesofágico, hérnia de hiato, varizes de esôfago, esofagite, 
+                            doença de Crohn, pólipos ou outros? Tem ou teve cálculo na vesícula ou doença no pâncreas?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">14)</th>
+                            <td>Tem ou teve doença psiquiátrica? Já esteve internado em clínica psiquiátrica?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+     
+                        <tr>
+                            <th scope="row">15)</th>
+                            <td>Tem ou teve hepatite(A,B ou C ou outras)? É portador do vírus HIV(AIDS) e suas complicações?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">16)</th>
+                            <td>Tem ou teve doença maligna (leucemia, linfomas, mama ou outros tipos de câncer)? Faz ou fez quimioterapia ou radioterapia?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">17)</th>
+                            <td>Tem ou teve doença das articulações, músculos ou dos ossos (articulação da mandíbula, hérnia de disco, artrose, artrite,
+                            escoliose, bico de papagaio, lesão de joelho, ombro ou outras)? Alguma doença reumatológica(lupus, artrite reumatóide ou outra)?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">18)</th>
+                            <td>Tem ou teve doença endocrinológica (hipertiroidismo, hipotireoidismo, doença suprarrenal ou outra)?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">19)</th>
+                            <td>Tem algum tipo de hérnia (inguinal, umbilical, bolsa escrotal ou outra)?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">20)</th>
+                            <td>Tem ou teve doença da próstata ou de infertilidade?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">21)</th>
+                            <td>Tem ou teve doença de mama(aumento de volume, displasia, nódulo ou outra)?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">22)</th>
+                            <td>Tem ou teve doença ginecológica( cisto de ovário, ovário policístico, mioma, endometriose, infertilidade ou outra)?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">23)</th>
+                            <td>Encontra-se internado ou em tratamento médico? Afastado do trabalho? Tem cirurgia programada?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">24)</th>
+                            <td>Tem ou teve doença congênita(desde que nasceu)? Alguma síndrome (Down, Marfan ou outra)?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">25)</th>
+                            <td>Encontra-se grávida?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">26)</th>
+                            <td>Usa ou já usou aparelho ortodôntico?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary btn-sm active">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-secondary btn-sm">
+                                    <input type="radio" name="options" id="option2" autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">27)</th>
+                            <td>Qual seu peso?</td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">28)</th>
+                            <td>Qual sua altura?</td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        
+                        
+                        
+                    
+                        
+
+                    </tbody>
+                </table>
+            
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                {% bootstrap_button "Salvar" button_type="submit" button_class="btn-info btn-lg btn-block" %}
+            
+            </div>
+        </form>
+</div>
+
+ 
+{% endblock %}
