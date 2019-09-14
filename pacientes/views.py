@@ -12,7 +12,7 @@ def home(request):
 def declaracaodesaude(request):
 
     try:
-        obj = Declaracaodesaude.objects.get(user=request.user)
+        obj = Declaracaodesaude.objects.get(created_by=request.user)
         form = DeclaracaodesaudeForm(request.POST or None, instance=obj)
         if request.method == "POST":
             declaracao = form.save()
@@ -30,5 +30,6 @@ def declaracaodesaude(request):
         else:
             form = DeclaracaodesaudeForm()
             
-
     return render(request, 'declaracaodesaude.html', {'form' : form})
+
+
