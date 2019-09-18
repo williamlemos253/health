@@ -5,6 +5,26 @@ from django import forms
 
 
 class DeclaracaodesaudeForm(ModelForm):
+    ans25 = forms.IntegerField(widget=forms.NumberInput(
+        attrs={
+        'class':'form-control',
+        'placeholder':'Peso',
+        'min': '1',
+        'max': '400',
+        'size': '3',
+
+        }
+    ))
+    ans26 = forms.IntegerField(widget=forms.NumberInput(
+        attrs={
+        'class':'form-control',
+        'placeholder':'Altura',
+        'min': '1',
+        'max': '250',
+        'size': '3',
+
+        }
+    ))
     class Meta:
         model = Declaracaodesaude
         fields = '__all__'

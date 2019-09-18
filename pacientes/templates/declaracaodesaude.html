@@ -1,16 +1,71 @@
+<style>
+
+.table td, .table th, table, td, th{
+    vertical-align: middle !important;
+ }
+
+ td:last-child {
+     text-align: center;
+ }
+
+ input[type=text] {
+     margin: 10px 0px;
+ }
+
+</style>
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 
 
+
+
+
 {% block content %}
 <div class="row mt-5 justify-content-md-center">
-        <div class="col-m10">
+
+        <div class="col-md-12">
+
+            <p>–Prezado(a) Beneficiário(a),</p>
+
+            <p>A <b>Agência Nacional de Saúde Suplementar (ANS),</b> instituição que regula as atividades das operadoras de planos privados de assistência à saúde, e tem como missão defender o interesse público vem, por meio desta, prestar informações para o preenchimento da DECLARAÇÃO DE SAÚDE.</p>
+            <br>
+            <h5>O QUE É A DECLARAÇÃO DE SAÚDE?</h5> 
+
+            <p>É o formulário que acompanha o Contrato do Plano de Saúde, onde o beneficiário ou seu representante legal deverá informar as doenças ou lesões preexistentes que saiba ser portador ou sofredor no momento da contratação do plano. Para o seu preenchimento, o beneficiário tem o direito de ser orientado, gratuitamente, por um médico credenciado/referenciado pela operadora. Se optar por um profissional de sua livre escolha, assumirá o custo desta opção.</p>
+
+            <p>Portanto, se o beneficiário (você) toma medicamentos regularmente, consulta médicos por problema de saúde do qual conhece o diagnóstico, fez qualquer exame que identificou alguma doença ou lesão, esteve internado ou submeteu-se a alguma cirurgia, DEVE DECLARAR ESTA DOENÇA OU LESÃO.</p>
+
+            <h5>AO DECLARAR AS DOENÇAS E/OU LESÕES QUE O BENEFICIÁRIO SAIBA SER PORTADOR NO MOMENTO DA CONTRATAÇÃO:</h5>
+
+            <ul>
+                <li>A operadora NÃO poderá impedi-lo de contratar o plano de saúde. Caso isto ocorra, encaminhe a denúncia à ANS.</li>
+                <li>A operadora deverá oferecer: cobertura total ou COBERTURA PARCIAL TEMPORÁRIA (CPT), podendo ainda oferecer o Agravo, que é um acréscimo no valor da mensalidade, pago ao plano privado de assistência à saúde, para que se possa utilizar toda a cobertura contratada, após os prazos de carências contratuais. </li>
+                <li> No caso de CPT, haverá restrição de cobertura para cirurgias, leitos de alta tecnologia (UTI, unidade coronariana ou neonatal) e procedimentos de alta complexidade - PAC (tomografia, ressonância, etc.*) EXCLUSIVAMENTE relacionados à doença ou lesão declarada, até 24 meses, contados desde a assinatura do contrato. Após o período máximo de 24 meses da assinatura contratual, a cobertura passará a ser integral de acordo com o plano contratado.</li> 
+                <li> NÃO haverá restrição de cobertura para consultas médicas, internações não cirúrgicas, exames e procedimentos que não sejam de alta complexidade, mesmo que relacionados à doença ou lesão preexistente declarada, desde que cumpridos os prazos de carências estabelecidas no contrato.</li> 
+                <li> Não caberá alegação posterior de omissão de informação na Declaração de Saúde por parte da operadora para esta doença ou lesão. </li>
+            </ul>
+
+            AO NÃO DECLARAR AS DOENÇAS E/OU LESÕES QUE O BENEFICIÁRIO SAIBA SER PORTADOR NO MOMENTO DA CONTRATAÇÃO: 
+            <ul>
+                <li>A operadora poderá suspeitar de omissão de informação e, neste caso, deverá comunicar imediatamente ao beneficiário, podendo oferecer CPT, ou solicitar abertura de processo administrativo junto à ANS, denunciando a omissão da informação.</li> 
+                <li>Comprovada a omissão de informação pelo beneficiário, a operadora poderá RESCINDIR o contrato por FRAUDE e responsabilizá-lo pelos procedimentos referentes à doença ou lesão não declarada.</li>
+                <li>Até o julgamento final do processo pela ANS, NÃO poderá ocorrer suspensão do atendimento nem rescisão do contrato. Caso isto ocorra, encaminhe a denúncia à ANS.</li>
+            </ul>
+            <h5>ATENÇÃO! </h5>
+            <p>Se a operadora oferecer redução ou isenção de carência, isto não significa que dará cobertura assistencial para as doenças ou lesões que o beneficiário saiba ter no momento da assinatura contratual. Cobertura Parcial Temporária - CPT - NÃO é carência! Portanto, o beneficiário não deve deixar de informar se possui alguma doença ou lesão ao preencher a Declaração de Saúde!</p>
+
+
+        </div>
+
+
+        <div class="col-md-12">
             <form method="POST"> {% csrf_token %}
                 <table class="table table-hover table-bordered" style="font-size: 18px;">
                     <tbody>
                         <tr>
                             <th scope="row">01)</th>
-                            <td>Tem ou teve asma ou bronquite?</td>
+                            <td>É portador(a) de doenças do aparelho cardiocirculatório, veias e artérias? (pressão alta, angina, infarto, 
+                            sopro cardíaco, málformações congênitas, arritmias, entre outras, inclusive congênitas, varizes, flebites)</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -27,7 +82,7 @@
                         <tr>
                         <tr>
                             <th scope="row">02)</th>
-                            <td>Tem ou teve miopia, hipermetropia ou astigmatismo?</td>
+                            <td>É portador(a) de doenças endócrinas ou metabólicas? (diabetes, tireóide, obesidade, outros distúrbios hormonais, inclusive congênitos)</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -41,7 +96,7 @@
                         </tr>
                         <tr>
                             <th scope="row">03)</th>
-                            <td>Tem ou teve estrabismo, catarata ceratocone, glaucoma, lesões da retina córnea?</td>
+                            <td>É portador(a) de problemas pulmonares? (asma, bronquite, enfisema, insuficiência respiratória, inclusive congênitas entre outras)</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -55,7 +110,7 @@
                         </tr>
                         <tr>
                             <th scope="row">04)</th>
-                            <td>Tem ou teve sinusite, desvio septo, hipermetrofia das amígdalas, adenóide ou doença do ronco? Tem indicação cirúrgica?</td>
+                            <td>É portador(a) de doenças do aparelho digestivo? (Fígado: hepatite, cirrose – Estômago: gastrite, úlcera,hérnia – Intestino preso, diarréias freqüentes, hemorróidas, - esôfago, pedra na vesícula biliar)</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -69,7 +124,7 @@
                         </tr>
                         <tr>
                             <th scope="row">05)</th>
-                            <td>Tem ou teve epilepsia, convulsão ou enxaqueca?</td>
+                            <td>É portador de doenças dos órgãos genitais masculinos? (próstata, testículo, pênis) – impotência, esterilidade, varicocele, inclusive doença congênita.</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -83,7 +138,7 @@
                         </tr>
                         <tr>
                             <th scope="row">06)</th>
-                            <td>Tem ou teve doença neurológica, do labirinto, derrame, Alzheimer, Parkinson, paralisia cerebral ou outra?</td>
+                            <td>É portadora de doenças ginecológicas e das mamas? (períneo, cisto de mama, cisto de ovário, mioma, esterilidade, doenças congênitas entre outras)</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -97,7 +152,7 @@
                         </tr>
                         <tr>
                             <th scope="row">07)</th>
-                            <td>Tem ou teve varizes?</td>
+                            <td>É portador(a) de problemas urinários renais ou da bexiga? (cálculos, infecções dos rins, insuficiência renal, incontinência urinária, inclusive doenças congênitas entre outras</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -111,7 +166,7 @@
                         </tr>
                         <tr>
                             <th scope="row">08)</th>
-                            <td>Tem ou teve pressão alta, infarto, angina, arritmias, aneurismas, trombose, embolia? Possui marca passo? Stent?</td>
+                            <td>É portador(a) de doenças infecto-contagiosas? (relacionadas ao vírus HIV, lepra, tuberculose entre outras)</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -125,7 +180,7 @@
                         </tr>
                         <tr>
                             <th scope="row">09)</th>
-                            <td>Tem ou teve doença do sangue (anemia, hemofilia, púrpura ou outra)?</td>
+                            <td>É portador (a) de alguma doença do sangue? (anemia, leucemia, hemofilia, linfomas, sangramentos entre outras)</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -139,7 +194,7 @@
                         </tr>
                         <tr>
                             <th scope="row">10)</th>
-                            <td>Tem ou teve Diabetes?</td>
+                            <td>É portador(a) de alguma doença do ouvido, nariz ou garganta? (diminuição da audição, perfuração do tímpano, infecções freqüentes, problemas de adenóide, tumor, desvio de septo, sinusite, amigdalite crônica entre outras, inclusive congênitas.)</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -153,7 +208,7 @@
                         </tr>
                         <tr>
                             <th scope="row">11)</th>
-                            <td>Tem ou teve doença de Rim(insuficiência renal, cálculo, infecção urinária de repetição, transplante ou outra)? Faz ou fez diálise ou hemodiálise?</td>
+                            <td>É portador (a) de doenças oftalmológicas? (miopia, astigmatismo, hipermetropia, ceratocone, catarata, glaucoma, pterígio, estrabismo, problemas ou alterações deretina, entre outros)</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -167,7 +222,7 @@
                         </tr>
                         <tr>
                             <th scope="row">12)</th>
-                            <td>Tem fimose, hidrocele, variocele, testículos não descidos (criptorquídia)?</td>
+                            <td>É portador (a) de doenças ou más formações (defeitos) congênitas ou hereditárias(familiares)?</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -181,8 +236,7 @@
                         </tr>
                         <tr>
                             <th scope="row">13)</th>
-                            <td>Tem ou teve úclera, refluxo gastroesofágico, hérnia de hiato, varizes de esôfago, esofagite, 
-                            doença de Crohn, pólipos ou outros? Tem ou teve cálculo na vesícula ou doença no pâncreas?</td>
+                            <td>É portador (a) de doenças ou tumorações malignas ou benignas(câncer)?</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -196,7 +250,9 @@
                         </tr>
                         <tr>
                             <th scope="row">14)</th>
-                            <td>Tem ou teve doença psiquiátrica? Já esteve internado em clínica psiquiátrica?</td>
+                            <td>É portador(a) de alguma doença neurológica? (derrame cerebral, epilepsia, convulsões, desmaios, 
+                            aneurisma cerebral, dores de cabeça freqüentes, paralisia cerebral, Parkinson, esclerose múltipla, 
+                            deficiência mental ou motora (movimentação dos membros), entre outras inclusive congênitas)</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -211,7 +267,7 @@
      
                         <tr>
                             <th scope="row">15)</th>
-                            <td>Tem ou teve hepatite(A,B ou C ou outras)? É portador do vírus HIV(AIDS) e suas complicações?</td>
+                            <td>Sofre de algum transtorno psiquiátrico? (psicose, esquizofrenia, neurose, depressão, retardo mental, entre outros)</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -225,7 +281,7 @@
                         </tr>
                         <tr>
                             <th scope="row">16)</th>
-                            <td>Tem ou teve doença maligna (leucemia, linfomas, mama ou outros tipos de câncer)? Faz ou fez quimioterapia ou radioterapia?</td>
+                            <td>É portador (a) de alguma dependência química? (álcool, cocaína, maconha, anfetaminas, entre outras)</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -239,8 +295,10 @@
                         </tr>
                         <tr>
                             <th scope="row">17)</th>
-                            <td>Tem ou teve doença das articulações, músculos ou dos ossos (articulação da mandíbula, hérnia de disco, artrose, artrite,
-                            escoliose, bico de papagaio, lesão de joelho, ombro ou outras)? Alguma doença reumatológica(lupus, artrite reumatóide ou outra)?</td>
+                            <td>É portador de alguma doença da pele? (psoríase,
+                                dermatite, vitiligo,tumorações, alergias, manchas,sinais
+                                ou cicatrizes entre outras, inclusive congênita)
+                            </td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -254,7 +312,8 @@
                         </tr>
                         <tr>
                             <th scope="row">18)</th>
-                            <td>Tem ou teve doença endocrinológica (hipertiroidismo, hipotireoidismo, doença suprarrenal ou outra)?</td>
+                            <td>É portador (a) de problemas ortopédicos ou doenças reumáticas?(artrose, artrite, hérnia de disco, 
+                            fraturas que deixaram seqüelas, osteoporose, escoliose, lombalgia, desvios da coluna entre outras inclusive congênitas)</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -268,7 +327,9 @@
                         </tr>
                         <tr>
                             <th scope="row">19)</th>
-                            <td>Tem algum tipo de hérnia (inguinal, umbilical, bolsa escrotal ou outra)?</td>
+                            <td>Possui algum tratamento clínico, cirúrgico ou transplante programado para os próximos meses? Especificar
+                            {% bootstrap_field form.ans19detalhes show_label=False %}
+                            </td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -282,7 +343,9 @@
                         </tr>
                         <tr>
                             <th scope="row">20)</th>
-                            <td>Tem ou teve doença da próstata ou de infertilidade?</td>
+                            <td>Realiza ou realizou diálise ou hemodiálise? Especificar 
+                            {% bootstrap_field form.ans20detalhes show_label=False %}
+                            </td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -296,7 +359,9 @@
                         </tr>
                         <tr>
                             <th scope="row">21)</th>
-                            <td>Tem ou teve doença de mama(aumento de volume, displasia, nódulo ou outra)?</td>
+                            <td>Realiza ou realizou Quimioterapia, Braquioterapia ou Radioterapia? Especificar
+                            {% bootstrap_field form.ans21detalhes show_label=False %}
+                            </td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -310,7 +375,9 @@
                         </tr>
                         <tr>
                             <th scope="row">22)</th>
-                            <td>Tem ou teve doença ginecológica( cisto de ovário, ovário policístico, mioma, endometriose, infertilidade ou outra)?</td>
+                            <td>Possui marca-passo ou outra prótese interna? (pinos, placas, parafusos). Especificar
+                            {% bootstrap_field form.ans22detalhes show_label=False %}
+                            </td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -324,7 +391,10 @@
                         </tr>
                         <tr>
                             <th scope="row">23)</th>
-                            <td>Encontra-se internado ou em tratamento médico? Afastado do trabalho? Tem cirurgia programada?</td>
+                            <td>Já foi submetido (a) a alguma cirurgia que deixou
+                                seqüelas? Especificar
+                                {% bootstrap_field form.ans23detalhes show_label=False %}
+                            </td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -338,7 +408,7 @@
                         </tr>
                         <tr>
                             <th scope="row">24)</th>
-                            <td>Tem ou teve doença congênita(desde que nasceu)? Alguma síndrome (Down, Marfan ou outra)?</td>
+                            <td>É portador(a) de Obesidade Mórbida?</td>
                             <td>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-secondary btn-sm active">
@@ -352,52 +422,34 @@
                         </tr>
                         <tr>
                             <th scope="row">25)</th>
-                            <td>Encontra-se grávida?</td>
+                            <td>Qual seu peso?</td>
                             <td>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-outline-secondary btn-sm active">
-                                    <input type="radio" name="ans25" id="id_ans25" value=True autocomplete="off" checked>Sim
-                                </label>
-                                <label class="btn btn-outline-secondary btn-sm">
-                                    <input type="radio" name="ans25" id="id_ans25" value=False autocomplete="off">Não
-                                </label>
+                               <div class="input-group" style="width: 120px;">
+                                    {{ form.ans25 }}
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2">KG</span>
+                                    </div>
+
                                 </div>
+                                
                             </td>
                         </tr>
                         <tr>
                             <th scope="row">26)</th>
-                            <td>Usa ou já usou aparelho ortodôntico?</td>
+                            <td>Qual sua altura?</td>
                             <td>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-outline-secondary btn-sm active">
-                                    <input type="radio" name="ans26" id="id_ans26" value=True autocomplete="off" checked>Sim
-                                </label>
-                                <label class="btn btn-outline-secondary btn-sm">
-                                    <input type="radio" name="ans26" id="id_ans26" value=False autocomplete="off">Não
-                                </label>
+                                <div class="input-group" style="width: 120px;">
+                                    {{ form.ans26 }}
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2">CM</span>
+                                    </div>
+
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row">27)</th>
-                            <td>Qual seu peso?</td>
-                            <td>
-                                {{ form.ans27 }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">28)</th>
-                            <td>Qual sua altura?</td>
-                            <td>
-                                {{ form.ans28 }}
-                            </td>
-                        </tr>
                         
                         
-                        
-                    
-                        
-
+                
                     </tbody>
                 </table>
             
@@ -411,4 +463,14 @@
 </div>
 
  
+{% endblock %}
+
+
+{% block javascript %} 
+    <script>
+        $(document).ready(function(){
+            $('#id_ans25').mask('0#');
+            $('#id_ans26').mask('0#');
+        });
+    </script>
 {% endblock %}

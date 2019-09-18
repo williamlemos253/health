@@ -4,6 +4,7 @@ from .models import Declaracaodesaude
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from django.contrib.auth.hashers import make_password
 
 
 # Create your views here.
@@ -53,6 +54,7 @@ def create_profile(request):
             if not user_form.cleaned_data['password'] == user_form.cleaned_data['password1']:
                 messages.error(request, 'Os campos de senha não são iguais.')
                 return redirect('/criarusuario')
+            usuario.password = make_password(user_form.cleaned_data['password'])
             usuario.save()
             perfil.user = usuario
             perfil.save()
