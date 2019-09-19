@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'pacientes',
     'escalas',
     'bootstrap4',
+    'import_export',
 ]
 
 MIDDLEWARE = [
