@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'import_export',
     'django_tables2',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

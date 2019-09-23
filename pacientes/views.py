@@ -5,6 +5,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
+from django_tables2 import SingleTableView
+from .tables import PacienteTable
 
 
 # Create your views here.
@@ -71,3 +74,19 @@ def create_profile(request):
     })
 
 
+
+
+# criptografa as senhas importados direto no banco de dados 
+def hashsenhas(request):
+    for user in User.objects.all():
+        user.set_password(user.password)
+        user.save()
+
+    return redirect('/')
+
+
+
+class PacientesListView(SingleTableView):
+    model = User
+    table_class = PacienteTable
+    template_name = 'pacientes.html'
