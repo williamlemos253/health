@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import home, declaracaodesaude, create_profile, hashsenhas, PacientesListView
+from .views import home, declaracaodesaude, create_profile, hashsenhas, pacientes
 
 urlpatterns = [
     path('', home),
     path('declaracaodesaude', declaracaodesaude),
     path('criarusuario', create_profile),
     path('hashsenhas', hashsenhas),
-    path('pacientes', PacientesListView.as_view(), name='Pacientes-view'),
+
+    path('pacientes', pacientes),
 ]

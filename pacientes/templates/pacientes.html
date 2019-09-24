@@ -1,16 +1,65 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
-{% load render_table from django_tables2 %}
+
+
 
 {% block content %}
 
-    <div class="row">
+
+<table
+  data-toggle="table"
+  id="table"
+  data-pagination="true"
+  data-search="true"
+  data-advanced-search="true"
+  data-id-table="advancedTable"
+  data-show-columns="true"
+  data-show-jump-to="true"
+  data-page-list="[10, 25, 50, 100, all]"
+  data-show-export="true"
+  data-show-refresh="true"
+  data-show-toggle="true"
+  >
+  
+  <thead>
+    <tr>
+      <th data-field="Nome" data-sortable="true">Nome</th>
+      <th data-field="Data de adesão" data-sortable="true">Data de adesão</th>
+      <th data-field="CPF">CPF</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+
+   {% for paciente in pacientes %}
+
+    <tr>
+      <td>{{ paciente.first_name }}{{ paciente.last_name }} </td>
+      <td>{{ paciente.date_joined|date:"d/m/Y" }}</td>
+      <td>{{ paciente.username }}</td>
+    </tr>
+
+  {% endfor %}
+ 
+  </tbody>
+</table>
 
 
-        {% render_table table %}
-
-    </div>
 
 
 
+
+
+
+
+{% endblock %}
+
+
+{% block javascript %}
+{{ block.super }}
+    <script>
+    $(function() {
+        $('#table').bootstrapTable()
+    })
+    </script>
 {% endblock %}

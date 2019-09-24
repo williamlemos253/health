@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Declaracaodesaude(models.Model):
     created_by = models.OneToOneField(User, verbose_name=("Usuário"), on_delete=models.CASCADE)
     criado_em = models.DateTimeField(auto_now_add=True, verbose_name=("Cadastrado em"))
+    leituratermos = models.BooleanField(default=False, null=True, verbose_name=("Declaro ter lido e compreendido o texto acima"))
     ans01 = models.BooleanField(default=True)
     ans02 = models.BooleanField(default=True)
     ans03 = models.BooleanField(default=True)

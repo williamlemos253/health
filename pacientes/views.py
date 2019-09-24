@@ -6,8 +6,6 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
-from django_tables2 import SingleTableView
-from .tables import PacienteTable
 
 
 # Create your views here.
@@ -86,7 +84,9 @@ def hashsenhas(request):
 
 
 
-class PacientesListView(SingleTableView):
-    model = User
-    table_class = PacienteTable
-    template_name = 'pacientes.html'
+
+def pacientes(request):
+    pacientes = User.objects.all()
+    pacientes = pacientes.filter(is_staff=False)
+
+    return render(request, 'pacientes.html', {'pacientes': pacientes })

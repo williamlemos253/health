@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'escalas',
     'bootstrap4',
     'import_export',
-    'django_tables2',
-    'django_filters',
 ]
 
 MIDDLEWARE = [
