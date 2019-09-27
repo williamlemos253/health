@@ -1,4 +1,4 @@
-from django.forms import ModelForm, CharField
+from django.forms import ModelForm, CharField, CheckboxInput
 from .models import Declaracaodesaude, Profile
 from django.contrib.auth.models import User
 from django import forms

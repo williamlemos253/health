@@ -19,6 +19,7 @@
   data-show-export="true"
   data-show-refresh="true"
   data-show-toggle="true"
+  data-silent-sort="false"
   >
   
   <thead>
@@ -26,7 +27,7 @@
       <th data-field="Nome" data-sortable="true">Nome</th>
       <th data-field="Data de adesão" data-sortable="true">Data de adesão</th>
       <th data-field="CPF">CPF</th>
-      <th>Description</th>
+      <th>Escalas</th>
     </tr>
   </thead>
   <tbody>
@@ -37,6 +38,7 @@
       <td>{{ paciente.first_name }}{{ paciente.last_name }} </td>
       <td>{{ paciente.date_joined|date:"d/m/Y" }}</td>
       <td>{{ paciente.username }}</td>
+      <td><a href="consultadeclaracaodesaude/{{ paciente.id }}">ANS</a></td>
     </tr>
 
   {% endfor %}
@@ -59,7 +61,9 @@
 {{ block.super }}
     <script>
     $(function() {
-        $('#table').bootstrapTable()
+        $('.container').LoadingOverlay("show");
+        $('#table').bootstrapTable();
+        $('.container').LoadingOverlay("hide");
     })
     </script>
 {% endblock %}

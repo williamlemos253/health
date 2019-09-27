@@ -21,10 +21,9 @@ def declaracaodesaude(request):
 
     try:
         obj = Declaracaodesaude.objects.get(created_by=request.user)
-        form = DeclaracaodesaudeForm(request.POST or None, instance=obj)
-        if request.method == "POST":
-            declaracao = form.save()
-    
+            
+        if obj is not None:
+            return render (request, 'declaracaodesaude_resultado.html', {'resultado' : obj})
     except:
         if request.method == "POST":
             form = DeclaracaodesaudeForm(request.POST)
@@ -35,12 +34,23 @@ def declaracaodesaude(request):
                 declaracao = form.save(commit=False)
                 declaracao.created_by = request.user
                 declaracao.save()
+                return redirect('/declaracaodesaude')
         else:
             form = DeclaracaodesaudeForm()
             
     return render(request, 'declaracaodesaude.html', {'form' : form})
 
 
+
+@login_required
+def consultadeclaracaodesaude(request, id):
+    try:
+        obj = Declaracaodesaude.objects.get(created_by=id)
+            
+        if obj is not None:
+            return render (request, 'declaracaodesaude_resultado.html', {'resultado' : obj})
+    except:
+            return render (request, 'embranco.html')
 
 
 @login_required
@@ -75,6 +85,7 @@ def create_profile(request):
 
 
 # criptografa as senhas importados direto no banco de dados 
+@login_required
 def hashsenhas(request):
     for user in User.objects.all():
         user.set_password(user.password)
@@ -85,6 +96,7 @@ def hashsenhas(request):
 
 
 
+@login_required
 def pacientes(request):
     pacientes = User.objects.all()
     pacientes = pacientes.filter(is_staff=False)

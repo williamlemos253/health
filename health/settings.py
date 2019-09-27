@@ -25,7 +25,7 @@ SECRET_KEY = 'i6_6q678-8bcf64mvfvg#^kxmsk-(@ey=07x94mm$7stp=xx!('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -79,13 +79,10 @@ WSGI_APPLICATION = 'health.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME', 'wiezpjee'),
-        'USER': os.environ.get('DB_USER', 'wiezpjee'),
-        'PASSWORD': os.environ.get('DB_PASS', 'DHNMQ2-GnvaIH61jNnepyKU7bOa1t83T'),
-        'HOST': 'tuffi.db.elephantsql.com',
-        'PORT': '5432'
-
+       
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
+        
     }
 }
 
@@ -130,3 +127,8 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# allow upload big file
+DATA_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 15  # 15M
+FILE_UPLOAD_MAX_MEMORY_SIZE = DATA_UPLOAD_MAX_MEMORY_SIZE
+SERVER_MAX_ITEM_LENGTH = 1024 * 1024 * 15

@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 class Declaracaodesaude(models.Model):
     created_by = models.OneToOneField(User, verbose_name=("Usuário"), on_delete=models.CASCADE)
     criado_em = models.DateTimeField(auto_now_add=True, verbose_name=("Cadastrado em"))
-    leituratermos = models.BooleanField(default=False, null=True, verbose_name=("Declaro ter lido e compreendido o texto acima"))
     ans01 = models.BooleanField(default=True)
     ans02 = models.BooleanField(default=True)
     ans03 = models.BooleanField(default=True)
@@ -40,10 +39,18 @@ class Declaracaodesaude(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    cpf = models.IntegerField(unique=True)
-    empresa = models.CharField(max_length=50, blank=True)
+    cpf = models.CharField(unique=True, max_length=15, blank=True)
+    empresa = models.CharField(max_length=100, blank=True)
     birth_date = models.DateField(null=True, blank=True, verbose_name=("Data de Nascimento") )
     sexo = models.CharField(max_length=15, blank=True)
     data_inclusao = models.DateField(null=True, blank=True, verbose_name=("Data de inclusão no plano"))
 
 
+class Usuarios(models.Model):
+    profile = models.ForeignKey(Profile, db_index=False, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, db_index=False, on_delete=models.CASCADE)
+    class Meta:
+        unique_together = (
+           'profile',
+           'user',
+        )

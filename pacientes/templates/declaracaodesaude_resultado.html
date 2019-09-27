@@ -1,0 +1,412 @@
+<style>
+
+.table td, .table th, table, td, th{
+    vertical-align: middle !important;
+ }
+
+ td:last-child {
+     text-align: center;
+ }
+
+ input[type=text] {
+     margin: 10px 0px;
+ }
+
+</style>
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+
+
+
+
+{% block content %}
+<div class="row mt-5 justify-content-md-center">
+
+        <div class="col-md-12">
+
+            <p>–Prezado(a) Beneficiário(a),</p>
+
+            <p>A <b>Agência Nacional de Saúde Suplementar (ANS),</b> instituição que regula as atividades das operadoras de planos privados de assistência à saúde, e tem como missão defender o interesse público vem, por meio desta, prestar informações para o preenchimento da DECLARAÇÃO DE SAÚDE.</p>
+            <br>
+            <h5>O QUE É A DECLARAÇÃO DE SAÚDE?</h5> 
+
+            <p>É o formulário que acompanha o Contrato do Plano de Saúde, onde o beneficiário ou seu representante legal deverá informar as doenças ou lesões preexistentes que saiba ser portador ou sofredor no momento da contratação do plano. Para o seu preenchimento, o beneficiário tem o direito de ser orientado, gratuitamente, por um médico credenciado/referenciado pela operadora. Se optar por um profissional de sua livre escolha, assumirá o custo desta opção.</p>
+
+            <p>Portanto, se o beneficiário (você) toma medicamentos regularmente, consulta médicos por problema de saúde do qual conhece o diagnóstico, fez qualquer exame que identificou alguma doença ou lesão, esteve internado ou submeteu-se a alguma cirurgia, DEVE DECLARAR ESTA DOENÇA OU LESÃO.</p>
+
+            <h5>AO DECLARAR AS DOENÇAS E/OU LESÕES QUE O BENEFICIÁRIO SAIBA SER PORTADOR NO MOMENTO DA CONTRATAÇÃO:</h5>
+
+            <ul>
+                <li>A operadora NÃO poderá impedi-lo de contratar o plano de saúde. Caso isto ocorra, encaminhe a denúncia à ANS.</li>
+                <li>A operadora deverá oferecer: cobertura total ou COBERTURA PARCIAL TEMPORÁRIA (CPT), podendo ainda oferecer o Agravo, que é um acréscimo no valor da mensalidade, pago ao plano privado de assistência à saúde, para que se possa utilizar toda a cobertura contratada, após os prazos de carências contratuais. </li>
+                <li> No caso de CPT, haverá restrição de cobertura para cirurgias, leitos de alta tecnologia (UTI, unidade coronariana ou neonatal) e procedimentos de alta complexidade - PAC (tomografia, ressonância, etc.*) EXCLUSIVAMENTE relacionados à doença ou lesão declarada, até 24 meses, contados desde a assinatura do contrato. Após o período máximo de 24 meses da assinatura contratual, a cobertura passará a ser integral de acordo com o plano contratado.</li> 
+                <li> NÃO haverá restrição de cobertura para consultas médicas, internações não cirúrgicas, exames e procedimentos que não sejam de alta complexidade, mesmo que relacionados à doença ou lesão preexistente declarada, desde que cumpridos os prazos de carências estabelecidas no contrato.</li> 
+                <li> Não caberá alegação posterior de omissão de informação na Declaração de Saúde por parte da operadora para esta doença ou lesão. </li>
+            </ul>
+
+            AO NÃO DECLARAR AS DOENÇAS E/OU LESÕES QUE O BENEFICIÁRIO SAIBA SER PORTADOR NO MOMENTO DA CONTRATAÇÃO: 
+            <ul>
+                <li>A operadora poderá suspeitar de omissão de informação e, neste caso, deverá comunicar imediatamente ao beneficiário, podendo oferecer CPT, ou solicitar abertura de processo administrativo junto à ANS, denunciando a omissão da informação.</li> 
+                <li>Comprovada a omissão de informação pelo beneficiário, a operadora poderá RESCINDIR o contrato por FRAUDE e responsabilizá-lo pelos procedimentos referentes à doença ou lesão não declarada.</li>
+                <li>Até o julgamento final do processo pela ANS, NÃO poderá ocorrer suspensão do atendimento nem rescisão do contrato. Caso isto ocorra, encaminhe a denúncia à ANS.</li>
+            </ul>
+            <h5>ATENÇÃO! </h5>
+            <p>Se a operadora oferecer redução ou isenção de carência, isto não significa que dará cobertura assistencial para as doenças ou lesões que o beneficiário saiba ter no momento da assinatura contratual. Cobertura Parcial Temporária - CPT - NÃO é carência! Portanto, o beneficiário não deve deixar de informar se possui alguma doença ou lesão ao preencher a Declaração de Saúde!</p>
+
+        </div>
+
+
+        <div class="col-md-12">
+                <table class="table table-hover table-bordered" style="font-size: 18px;">
+                    <tbody>
+                        <tr>
+                            <th scope="row">01)</th>
+                            <td>É portador(a) de doenças do aparelho cardiocirculatório, veias e artérias? (pressão alta, angina, infarto, 
+                            sopro cardíaco, málformações congênitas, arritmias, entre outras, inclusive congênitas, varizes, flebites)</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans01" id="id_ans01" value=True autocomplete="off" checked>{% if resultado.ans01 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+                           
+                                </div>
+
+              
+                               
+                            </td>
+                        <tr>
+                        <tr>
+                            <th scope="row">02)</th>
+                            <td>É portador(a) de doenças endócrinas ou metabólicas? (diabetes, tireóide, obesidade, outros distúrbios hormonais, inclusive congênitos)</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans02" id="id_ans02" value=True autocomplete="off" checked>{% if resultado.ans02 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+                        
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">03)</th>
+                            <td>É portador(a) de problemas pulmonares? (asma, bronquite, enfisema, insuficiência respiratória, inclusive congênitas entre outras)</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans03" id="id_ans03" value=True autocomplete="off" checked>{% if resultado.ans03 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+                         
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">04)</th>
+                            <td>É portador(a) de doenças do aparelho digestivo? (Fígado: hepatite, cirrose – Estômago: gastrite, úlcera,hérnia – Intestino preso, diarréias freqüentes, hemorróidas, - esôfago, pedra na vesícula biliar)</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans04" id="id_ans04" value=True autocomplete="off" checked>{% if resultado.ans04 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+                   
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">05)</th>
+                            <td>É portador de doenças dos órgãos genitais masculinos? (próstata, testículo, pênis) – impotência, esterilidade, varicocele, inclusive doença congênita.</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans05" id="id_ans05" value=True autocomplete="off" checked>{% if resultado.ans01 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+                   
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">06)</th>
+                            <td>É portadora de doenças ginecológicas e das mamas? (períneo, cisto de mama, cisto de ovário, mioma, esterilidade, doenças congênitas entre outras)</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans06" id="id_ans06" value=True autocomplete="off" checked>{% if resultado.ans06 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">07)</th>
+                            <td>É portador(a) de problemas urinários renais ou da bexiga? (cálculos, infecções dos rins, insuficiência renal, incontinência urinária, inclusive doenças congênitas entre outras</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans07" id="id_ans07" value=True autocomplete="off" checked>{% if resultado.ans07 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+            
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">08)</th>
+                            <td>É portador(a) de doenças infecto-contagiosas? (relacionadas ao vírus HIV, lepra, tuberculose entre outras)</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans08" id="id_ans08" value=True autocomplete="off" checked>{% if resultado.ans08 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+  
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">09)</th>
+                            <td>É portador (a) de alguma doença do sangue? (anemia, leucemia, hemofilia, linfomas, sangramentos entre outras)</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans09" id="id_ans09" value=True autocomplete="off" checked>{% if resultado.ans09 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+                   
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">10)</th>
+                            <td>É portador(a) de alguma doença do ouvido, nariz ou garganta? (diminuição da audição, perfuração do tímpano, infecções freqüentes, problemas de adenóide, tumor, desvio de septo, sinusite, amigdalite crônica entre outras, inclusive congênitas.)</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans10" id="id_ans10" value=True autocomplete="off" checked>{% if resultado.ans10 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+                     
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">11)</th>
+                            <td>É portador (a) de doenças oftalmológicas? (miopia, astigmatismo, hipermetropia, ceratocone, catarata, glaucoma, pterígio, estrabismo, problemas ou alterações deretina, entre outros)</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans11" id="id_ans11" value=True autocomplete="off" checked>{% if resultado.ans11 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+             
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">12)</th>
+                            <td>É portador (a) de doenças ou más formações (defeitos) congênitas ou hereditárias(familiares)?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans12" id="id_ans12" value=True autocomplete="off" checked>{% if resultado.ans12 == True  %}Sim {% else %} Não {% endif %}
+  
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">13)</th>
+                            <td>É portador (a) de doenças ou tumorações malignas ou benignas(câncer)?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans13" id="id_ans13" value=True autocomplete="off" checked>{% if resultado.ans13 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">14)</th>
+                            <td>É portador(a) de alguma doença neurológica? (derrame cerebral, epilepsia, convulsões, desmaios, 
+                            aneurisma cerebral, dores de cabeça freqüentes, paralisia cerebral, Parkinson, esclerose múltipla, 
+                            deficiência mental ou motora (movimentação dos membros), entre outras inclusive congênitas)</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans14" id="id_ans14" value=True autocomplete="off" checked>{% if resultado.ans14 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+
+                                </div>
+                            </td>
+                        </tr>
+     
+                        <tr>
+                            <th scope="row">15)</th>
+                            <td>Sofre de algum transtorno psiquiátrico? (psicose, esquizofrenia, neurose, depressão, retardo mental, entre outros)</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans15" id="id_ans15" value=True autocomplete="off" checked>{% if resultado.ans15 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+            
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">16)</th>
+                            <td>É portador (a) de alguma dependência química? (álcool, cocaína, maconha, anfetaminas, entre outras)</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans16" id="id_ans16" value=True autocomplete="off" checked>{% if resultado.ans16 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">17)</th>
+                            <td>É portador de alguma doença da pele? (psoríase,
+                                dermatite, vitiligo,tumorações, alergias, manchas,sinais
+                                ou cicatrizes entre outras, inclusive congênita)
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans17" id="id_ans17" value=True autocomplete="off" checked>{% if resultado.ans17 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+            
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">18)</th>
+                            <td>É portador (a) de problemas ortopédicos ou doenças reumáticas?(artrose, artrite, hérnia de disco, 
+                            fraturas que deixaram seqüelas, osteoporose, escoliose, lombalgia, desvios da coluna entre outras inclusive congênitas)</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans18" id="id_ans18" value=True autocomplete="off" checked>{% if resultado.ans18 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+  
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">19)</th>
+                            <td>Possui algum tratamento clínico, cirúrgico ou transplante programado para os próximos meses? <b>{{resultado.ans19detalhes}}</b>
+                            
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans19" id="id_ans19" value=True autocomplete="off" checked>{% if resultado.ans19 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">20)</th>
+                            <td>Realiza ou realizou diálise ou hemodiálise? <b>{{resultado.ans20detalhes}}</b>
+                            
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans20" id="id_ans20" value=True autocomplete="off" checked>{% if resultado.ans20 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+ 
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">21)</th>
+                            <td>Realiza ou realizou Quimioterapia, Braquioterapia ou Radioterapia? <b>{{resultado.ans21detalhes}}</b>
+                           
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans21" id="id_ans21" value=True autocomplete="off" checked>{% if resultado.ans21 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+             
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">22)</th>
+                            <td>Possui marca-passo ou outra prótese interna? (pinos, placas, parafusos).<b>{{resultado.ans22detalhes}}</b>
+                           
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans22" id="id_ans22" value=True autocomplete="off" checked>{% if resultado.ans22 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">23)</th>
+                            <td>Já foi submetido (a) a alguma cirurgia que deixou
+                                seqüelas?
+                                 <b>{{resultado.ans23detalhes}}</b>
+                                
+                            
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans23" id="id_ans23" value=True autocomplete="off" checked>{% if resultado.ans23 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">24)</th>
+                            <td>É portador(a) de Obesidade Mórbida?</td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="ans24" id="id_ans24" value=True autocomplete="off" checked>{% if resultado.ans24 == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+                  
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">25)</th>
+                            <td>Qual seu peso?</td>
+                            <td>
+                          
+                                   <b> {{ resultado.ans25 }}KG </b>
+                                
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">26)</th>
+                            <td>Qual sua altura?</td>
+                            <td>
+                               <b> {{ resultado.ans26 }}CM </b>
+                            </td>
+                        </tr>
+                        
+                        
+                
+                    </tbody>
+                </table>
+            
+            </div>
+      
+</div>
+
+ 
+{% endblock %}
+
+
+{% block javascript %} 
+    <script>
+        $(document).ready(function(){
+            $('#id_ans25').mask('#00');
+            $('#id_ans26').mask('#00');
+        });
+    </script>
+{% endblock %}
