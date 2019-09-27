@@ -25,6 +25,8 @@
   <thead>
     <tr>
       <th data-field="Nome" data-sortable="true">Nome</th>
+      <th data-field="Sexo" data-sortable="true">Sexo</th>
+      <th data-field="datanasc" data-sortable="true">Data Nasc.</th>
       <th data-field="Data de adesão" data-sortable="true">Data de adesão</th>
       <th data-field="CPF">CPF</th>
       <th>Escalas</th>
@@ -35,10 +37,12 @@
    {% for paciente in pacientes %}
 
     <tr>
-      <td>{{ paciente.first_name }}{{ paciente.last_name }} </td>
-      <td>{{ paciente.date_joined|date:"d/m/Y" }}</td>
-      <td>{{ paciente.username }}</td>
-      <td><a href="consultadeclaracaodesaude/{{ paciente.id }}">ANS</a></td>
+      <td>{{ paciente.user.last_name }} </td>
+      <td>{{ paciente.sexo }}</td>
+      <td>{{ paciente.birth_date|date:"d/m/Y" }}</td>
+      <td>{{ paciente.user.date_joined|date:"d/m/Y" }}</td>
+      <td>{{ paciente.user.username }}</td>
+      <td><a href="consultadeclaracaodesaude/{{ paciente.user.id }}">ANS</a></td>
     </tr>
 
   {% endfor %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import DeclaracaodesaudeForm, UserForm, ProfileForm
-from .models import Declaracaodesaude
+from .models import Declaracaodesaude, Profile
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
@@ -98,7 +98,8 @@ def hashsenhas(request):
 
 @login_required
 def pacientes(request):
-    pacientes = User.objects.all()
-    pacientes = pacientes.filter(is_staff=False)
+    pacientes = Profile.objects.all()
+    pacientes = pacientes.filter(user__is_staff=False)
+
 
     return render(request, 'pacientes.html', {'pacientes': pacientes })
