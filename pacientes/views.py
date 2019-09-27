@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -103,3 +104,16 @@ def pacientes(request):
 
 
     return render(request, 'pacientes.html', {'pacientes': pacientes })
+
+
+@login_required
+def jsonPacientes(request):
+    pacientes = Profile.objects.select_related()
+    pacientes = pacientes.filter(user__is_staff=False).values('user__last_name','sexo','birth_date','data_inclusao','cpf', 'user__id')
+
+
+
+    pacientes_list = list(pacientes)  # important: convert the QuerySet to a list object
+
+
+    return JsonResponse(pacientes_list, safe=False)

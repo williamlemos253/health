@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+
+
+{% block content %}
+
+
+<table
+  data-toggle="table"
+  id="table"
+  data-pagination="true"
+  data-search="true"
+  data-advanced-search="true"
+  data-id-table="advancedTable"
+  data-show-columns="true"
+  data-show-jump-to="true"
+  data-page-list="[10, 25, 50, 100, all]"
+  data-show-export="true"
+  data-show-refresh="true"
+  data-show-toggle="true"
+  data-silent-sort="false"
+  >
+  
+  <thead>
+    <tr>
+      <th data-field="Nome" data-sortable="true">Nome</th>
+      <th data-field="Sexo" data-sortable="true">Sexo</th>
+      <th data-field="datanasc" data-sortable="true">Data Nasc.</th>
+      <th data-field="Data de adesão" data-sortable="true">Data de adesão</th>
+      <th data-field="CPF">CPF</th>
+      <th>Escalas</th>
+    </tr>
+  </thead>
+  <tbody>
+
+   {% for paciente in pacientes %}
+
+    <tr>
+      <td>{{ paciente.user.last_name }} </td>
+      <td>{{ paciente.sexo }}</td>
+      <td>{{ paciente.birth_date|date:"d/m/Y" }}</td>
+      <td>{{ paciente.user.date_joined|date:"d/m/Y" }}</td>
+      <td>{{ paciente.user.username }}</td>
+      <td><a href="consultadeclaracaodesaude/{{ paciente.user.id }}">ANS</a></td>
+    </tr>
+
+  {% endfor %}
+ 
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block javascript %}
+{{ block.super }}
+    <script>
+    $(function() {
+        $('.container').LoadingOverlay("show");
+        $('#table').bootstrapTable();
+        $('.container').LoadingOverlay("hide");
+    })
+    </script>
+{% endblock %}

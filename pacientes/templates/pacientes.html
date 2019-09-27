@@ -20,37 +20,25 @@
   data-show-refresh="true"
   data-show-toggle="true"
   data-silent-sort="false"
+  data-search-accent-neutralise="true"
+  data-url="/jsonpacientes"
   >
   
   <thead>
     <tr>
-      <th data-field="Nome" data-sortable="true">Nome</th>
-      <th data-field="Sexo" data-sortable="true">Sexo</th>
-      <th data-field="datanasc" data-sortable="true">Data Nasc.</th>
-      <th data-field="Data de adesão" data-sortable="true">Data de adesão</th>
-      <th data-field="CPF">CPF</th>
-      <th>Escalas</th>
+      <th data-field="user__last_name" data-sortable="true">Nome</th>
+      <th data-field="sexo" data-sortable="true">Sexo</th>
+      <th data-field="birth_date" data-sortable="true" data-formatter="dateFormat">Data Nasc.</th>
+      <th data-field="data_inclusao" data-sortable="true" data-formatter="dateFormat">Data de adesão</th>
+      <th data-field="cpf">CPF</th>
+      <th data-field="user__id" data-formatter="operateFormatter">Escalas</th>
     </tr>
   </thead>
-  <tbody>
-
-   {% for paciente in pacientes %}
-
-    <tr>
-      <td>{{ paciente.user.last_name }} </td>
-      <td>{{ paciente.sexo }}</td>
-      <td>{{ paciente.birth_date|date:"d/m/Y" }}</td>
-      <td>{{ paciente.user.date_joined|date:"d/m/Y" }}</td>
-      <td>{{ paciente.user.username }}</td>
-      <td><a href="consultadeclaracaodesaude/{{ paciente.user.id }}">ANS</a></td>
-    </tr>
-
-  {% endfor %}
- 
-  </tbody>
 </table>
 
 
+
+ 
 
 
 
@@ -70,4 +58,25 @@
         $('.container').LoadingOverlay("hide");
     })
     </script>
+
+<script>
+  function dateFormat(value, row, index) {
+    return moment(value).format('DD/MM/YYYY');
+  }
+</script>
+
+<script>
+  function operateFormatter(value, row, index) {
+    return [
+      '<a class="like" href="/consultadeclaracaodesaude/'+  value  +'" title="Declaração de Saúde">',
+      '<i class="far fa-address-card fa-2x"></i>', 
+      '</a>  ',
+      '<a class="remove" href="javascript:void(0)" title="Remove">',
+      '<i class="fa fa-trash"></i>',
+      '</a>'
+    ].join('')
+  }
+
+</script>
+
 {% endblock %}
