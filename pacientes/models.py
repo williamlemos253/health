@@ -44,13 +44,3 @@ class Profile(models.Model):
     birth_date = models.DateField(null=True, blank=True, verbose_name=("Data de Nascimento") )
     sexo = models.CharField(max_length=15, blank=True)
     data_inclusao = models.DateField(null=True, blank=True, verbose_name=("Data de inclusão no plano"))
-
-
-class Usuarios(models.Model):
-    profile = models.ForeignKey(Profile, db_index=False, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, db_index=False, on_delete=models.CASCADE)
-    class Meta:
-        unique_together = (
-           'profile',
-           'user',
-        )
