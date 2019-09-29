@@ -29,9 +29,10 @@
       <th data-field="user__last_name" data-sortable="true">Nome</th>
       <th data-field="sexo" data-sortable="true">Sexo</th>
       <th data-field="birth_date" data-sortable="true" data-formatter="dateFormat">Data Nasc.</th>
-      <th data-field="data_inclusao" data-sortable="true" data-formatter="dateFormat">Data de adesão</th>
+      <th data-field="data_inclusao" data-sortable="true" data-formatter="dateFormat">Adesão</th>
       <th data-field="cpf">CPF</th>
       <th data-field="user__id" data-formatter="operateFormatter">Escalas</th>
+      <th data-field="user__id" data-formatter="operateFormatter2">Resultados</th>
     </tr>
   </thead>
 </table>
@@ -74,6 +75,14 @@
       '<a class="remove" href="/escalamedica/' + value +'" title="Escala Médica">',
       '<i class="fas fa-user-md fa-2x"></i>',
       '</a>'
+    ].join('')
+  }
+
+   function operateFormatter2(value, row, index) {
+    return [
+      '<a class="remove" href="/escalamedicaresultado/' + value +'" title="Escala Médica">',
+      '<i class="fas fa-user-md fa-2x"></i>',
+      '</a>',
     ].join('')
   }
 

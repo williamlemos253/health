@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from .forms import EscalaMedicaForm
+from .models import Escalamedica
+from pacientes.models import Profile
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from datetime import datetime, date
 
 # Create your views here.
 
@@ -10,9 +14,7 @@ def escalamedica(request, id_paciente):
     
     if request.method == 'POST':
         form = EscalaMedicaForm(request.POST)
-        print (request.POST)
         if form.is_valid():
-            print ('é válido')
             escala = form.save(commit=False)
             escala.paciente = paciente
             escala.medico = request.user.last_name
@@ -25,6 +27,9 @@ def escalamedica(request, id_paciente):
                   + escala.musculosqueletico  + escala.neurologico + escala.endocrino + escala.psiquiatrica
             
             contadorcatclass = 0
+            contnumcatsev0 = 0
+            contnumcatsev1 = 0
+            contnumcatsev2 = 0
             contnumcatsev3 = 0
             contnumcatsev4 = 0
 
@@ -62,6 +67,101 @@ def escalamedica(request, id_paciente):
 
             #calcula o indice de gravidade do paciente
             escala.indgravidade = escala.pontuacao / contadorcatclass
+
+
+            if int(escala.coracao) == 0:
+                contnumcatsev0 = contnumcatsev0 + 1
+            if int(escala.vascular) == 0:
+                contnumcatsev0 = contnumcatsev0 + 1
+            if int(escala.hematopoietico) == 0:
+                contnumcatsev0 = contnumcatsev0 + 1
+            if int(escala.respiratorio) == 0:
+                contnumcatsev0 = contnumcatsev0 + 1
+            if int(escala.otorrino) == 0:
+                contnumcatsev0 = contnumcatsev0 + 1
+            if int(escala.gastrointestinalsup) == 0:
+                contnumcatsev0 = contnumcatsev0 + 1
+            if int(escala.gastrointestinalinf) == 0:
+                contnumcatsev0 = contnumcatsev0 + 1
+            if int(escala.figado) == 0:
+                contnumcatsev0 = contnumcatsev0 + 1
+            if int(escala.renal) == 0:
+                contnumcatsev0 = contnumcatsev0 + 1
+            if int(escala.genitourinario) == 0:
+                contnumcatsev0 = contnumcatsev0 + 1
+            if int(escala.musculosqueletico) == 0:
+                contnumcatsev0 = contnumcatsev0 + 1
+            if int(escala.neurologico) == 0:
+                contnumcatsev0 = contnumcatsev0 + 1
+            if int(escala.endocrino) == 0:
+                contnumcatsev0 = contnumcatsev0 + 1
+            if int(escala.psiquiatrica) == 0:
+                contnumcatsev0 = contnumcatsev0 + 1
+
+            escala.numcatsev0 = contnumcatsev0
+
+            if int(escala.coracao) == 1:
+                contnumcatsev1 = contnumcatsev1 + 1
+            if int(escala.vascular) == 1:
+                contnumcatsev1 = contnumcatsev1 + 1
+            if int(escala.hematopoietico) == 1:
+                contnumcatsev1 = contnumcatsev1 + 1
+            if int(escala.respiratorio) == 1:
+                contnumcatsev1 = contnumcatsev1 + 1
+            if int(escala.otorrino) == 1:
+                contnumcatsev1 = contnumcatsev1 + 1
+            if int(escala.gastrointestinalsup) == 1:
+                contnumcatsev1 = contnumcatsev1 + 1
+            if int(escala.gastrointestinalinf) == 1:
+                contnumcatsev1 = contnumcatsev1 + 1
+            if int(escala.figado) == 1:
+                contnumcatsev1 = contnumcatsev1 + 1
+            if int(escala.renal) == 1:
+                contnumcatsev1 = contnumcatsev1 + 1
+            if int(escala.genitourinario) == 1:
+                contnumcatsev1 = contnumcatsev1 + 1
+            if int(escala.musculosqueletico) == 1:
+                contnumcatsev1 = contnumcatsev1 + 1
+            if int(escala.neurologico) == 1:
+                contnumcatsev1 = contnumcatsev1 + 1
+            if int(escala.endocrino) == 1:
+                contnumcatsev1 = contnumcatsev1 + 1
+            if int(escala.psiquiatrica) == 1:
+                contnumcatsev1 = contnumcatsev1 + 1
+
+            escala.numcatsev1 = contnumcatsev1
+
+            if int(escala.coracao) == 2:
+                contnumcatsev2 = contnumcatsev2 + 1
+            if int(escala.vascular) == 2:
+                contnumcatsev2 = contnumcatsev2 + 1
+            if int(escala.hematopoietico) == 2:
+                contnumcatsev2 = contnumcatsev2 + 1
+            if int(escala.respiratorio) == 2:
+                contnumcatsev2 = contnumcatsev2 + 1
+            if int(escala.otorrino) == 2:
+                contnumcatsev2 = contnumcatsev2 + 1
+            if int(escala.gastrointestinalsup) == 2:
+                contnumcatsev2 = contnumcatsev2 + 1
+            if int(escala.gastrointestinalinf) == 2:
+                contnumcatsev2 = contnumcatsev2 + 1
+            if int(escala.figado) == 2:
+                contnumcatsev2 = contnumcatsev2 + 1
+            if int(escala.renal) == 2:
+                contnumcatsev2 = contnumcatsev2 + 1
+            if int(escala.genitourinario) == 2:
+                contnumcatsev2 = contnumcatsev2 + 1
+            if int(escala.musculosqueletico) == 2:
+                contnumcatsev2 = contnumcatsev2 + 1
+            if int(escala.neurologico) == 2:
+                contnumcatsev2 = contnumcatsev2 + 1
+            if int(escala.endocrino) == 2:
+                contnumcatsev2 = contnumcatsev2 + 1
+            if int(escala.psiquiatrica) == 2:
+                contnumcatsev2 = contnumcatsev2 + 1
+
+            escala.numcatsev2 = contnumcatsev2
+
 
             if int(escala.coracao) == 3:
                 contnumcatsev3 = contnumcatsev3 + 1
@@ -127,8 +227,33 @@ def escalamedica(request, id_paciente):
 
             escala.save()
     else:
-        escala = EscalaMedicaForm()
+        form = EscalaMedicaForm()
+
+
+    return render (request, 'escalamedica.html', {'form':form})
 
 
 
-    return render (request, 'escalamedica.html', {'form':escala})
+@login_required
+def escalamedicaresultado(request, id_paciente):
+    paciente = Profile.objects.get(user=id_paciente)
+    idade = calculate_age(paciente.birth_date)
+    print (idade)
+    resultado = Escalamedica.objects.filter(paciente=id_paciente).order_by('datareg').last()
+
+
+    
+    return render (request, 'escalamedicaresultado.html', { 'resultados':resultado, 'idade':idade})
+
+
+#classe para calcular idades a partir de datas
+def calculate_age(born):
+    today = date.today()
+    try: 
+        birthday = born.replace(year=today.year)
+    except ValueError: # raised when birth date is February 29 and the current year is not a leap year
+        birthday = born.replace(year=today.year, month=born.month+1, day=1)
+    if birthday > today:
+        return today.year - born.year - 1
+    else:
+        return today.year - born.year

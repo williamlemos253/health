@@ -26,5 +26,8 @@ class Escalamedica(models.Model):
     numcatclass = models.PositiveSmallIntegerField()
     pontuacao = models.PositiveSmallIntegerField()
     indgravidade = models.FloatField()
+    numcatsev0 = models.PositiveSmallIntegerField()
+    numcatsev1 = models.PositiveSmallIntegerField()
+    numcatsev2 = models.PositiveSmallIntegerField()
     numcatsev3 = models.PositiveSmallIntegerField()
     numcatsev4 = models.PositiveSmallIntegerField()

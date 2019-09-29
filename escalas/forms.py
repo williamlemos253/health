@@ -6,20 +6,8 @@ from bootstrap4.widgets import RadioSelectButtonGroup
 
 
 class EscalaMedicaForm(ModelForm):
-    coracao = forms.ChoiceField(
-        required=True,
-        widget=RadioSelectButtonGroup
-        (
-            attrs={
-            'class':'btn-info btn-lg collapsed',
-            },
-        ),
-        choices=((0, '0'), (1, '1'), (2, '2'), (3, '3'), (4, '4')),
-        initial=0,
-        
-    )
     class Meta:
         model = Escalamedica
         fields = '__all__'
         exclude = ['paciente', 'medico', 'medico_id','datareg','numcatclass', 'pontuacao', 
-        'indgravidade', 'numcatsev3', 'numcatsev4']
+        'indgravidade', 'numcatsev0', 'numcatsev1', 'numcatsev2', 'numcatsev3', 'numcatsev4']
