@@ -1,10 +1,11 @@
-from django.shortcuts import render
-from .forms import EscalaMedicaForm
-from .models import Escalamedica
+from django.shortcuts import render, redirect
+from .forms import EscalaMedicaForm, EscalaSocialForm
+from .models import Escalamedica, Escalasocial
 from pacientes.models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from datetime import datetime, date
+from .funcoes import calculate_age
+from django.contrib import messages
 
 # Create your views here.
 
@@ -226,6 +227,13 @@ def escalamedica(request, id_paciente):
             escala.numcatsev4 = contnumcatsev4
 
             escala.save()
+            messages.success(request, 'Escala Médica cadastrada com sucesso!')
+            
+            return redirect("/escalamedicaresultado/"+str(id_paciente))
+            
+        else:
+            messages.alert(request, 'Valores inválidos detectados!')
+
     else:
         form = EscalaMedicaForm()
 
@@ -245,15 +253,55 @@ def escalamedicaresultado(request, id_paciente):
     
     return render (request, 'escalamedicaresultado.html', { 'resultados':resultado, 'idade':idade})
 
+@login_required
+def escalamedicaresultadosanteriores(request, id):
+    resultado = Escalamedica.objects.filter(paciente=id).order_by('datareg').reverse()
+    return render (request, 'escalamedicaresultadosanteriores.html', {'resultados':resultado})
 
-#classe para calcular idades a partir de datas
-def calculate_age(born):
-    today = date.today()
-    try: 
-        birthday = born.replace(year=today.year)
-    except ValueError: # raised when birth date is February 29 and the current year is not a leap year
-        birthday = born.replace(year=today.year, month=born.month+1, day=1)
-    if birthday > today:
-        return today.year - born.year - 1
-    else:
-        return today.year - born.year
+
+@login_required
+def escalamedicafiltrada(request, id):
+    resultado = Escalamedica.objects.get(id=id)
+    return render (request, 'escalamedica.html', {'resultados':resultado})
+
+
+@login_required
+def escalasocial(request, id):
+    form = EscalaSocialForm()
+    nomepaciente = Profile.objects.get(user=id)
+
+    pontuacao = 0
+    if form.is_valid():
+        escala =  form.save(commit=False)
+        if escala.acamado == True:
+            pontuacao = pontuacao + 3
+        if escala.deficienciafisica == True:
+            pontuacao = pontuacao + 3
+        if escala.deficienciamental == True:
+            pontuacao = pontuacao + 3
+        if escala.saneamento == True:
+            pontuacao = pontuacao + 3
+        if escala.desnutricao == True:
+            pontuacao = pontuacao + 3
+        if escala.drogadicao == True:
+            pontuacao = pontuacao + 2
+        if escala.desempregado == True:
+            pontuacao = pontuacao + 2
+        if escala.analfabetismo == True:
+            pontuacao = pontuacao + 1
+        if  escala.menor == True:
+            pontuacao = pontuacao + 1
+        if  escala.maior == True:
+            pontuacao = pontuacao + 1
+        if  escala.hipertensao == True:
+            pontuacao = pontuacao + 1
+            
+        pontuacao = pontuacao + int(moradores)
+
+        escala.save()
+        
+
+        messages.success(request, 'Dados da escala de coelho cadastrados com sucesso')
+        return redirect("/escaladecoelhoresultado/"+str(id))
+
+    return render (request, 'escalasocial.html', {'paciente':nomepaciente.user.last_name, 'form':form})

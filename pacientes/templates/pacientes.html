@@ -31,8 +31,9 @@
       <th data-field="birth_date" data-sortable="true" data-formatter="dateFormat">Data Nasc.</th>
       <th data-field="data_inclusao" data-sortable="true" data-formatter="dateFormat">Adesão</th>
       <th data-field="cpf">CPF</th>
-      <th data-field="user__id" data-formatter="operateFormatter">Escalas</th>
-      <th data-field="user__id" data-formatter="operateFormatter2">Resultados</th>
+      <th data-field="user__id" data-formatter="operateFormatter">Saúde</th>
+      <th data-field="user__id" data-formatter="operateFormatter2">Médica</th>
+      <th data-field="user__id" data-formatter="operateFormatter3">Psicosocial</th>
     </tr>
   </thead>
 </table>
@@ -72,16 +73,26 @@
       '<a class="like" href="/consultadeclaracaodesaude/'+  value  +'" title="Declaração de Saúde">',
       '<i class="far fa-address-card fa-2x"></i>', 
       '</a>  ',
-      '<a class="remove" href="/escalamedica/' + value +'" title="Escala Médica">',
-      '<i class="fas fa-user-md fa-2x"></i>',
-      '</a>'
     ].join('')
   }
 
    function operateFormatter2(value, row, index) {
     return [
-      '<a class="remove" href="/escalamedicaresultado/' + value +'" title="Escala Médica">',
+      '<a class="remove" href="/escalamedica/' + value +'" title="Escala Médica">',
       '<i class="fas fa-user-md fa-2x"></i>',
+      '</a>',
+      ' ',
+      '<a class="remove" href="/escalamedicaresultado/' + value +'" title="Escala Médica">',
+      '<i class="far fa-address-card fa-2x"></i>',
+      '</a>',
+    ].join('')
+  }
+
+
+   function operateFormatter3(value, row, index) {
+    return [
+      '<a class="remove" href="/escalasocial/' + value +'" title="Escala Psicosocial">',
+      '<i class="fas fa-user-friends fa-2x"></i>',
       '</a>',
     ].join('')
   }

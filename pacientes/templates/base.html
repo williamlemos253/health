@@ -16,6 +16,7 @@
 
     {% bootstrap_javascript jquery='full' %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha256-Kg2zTcFO9LXOc7IwcBx1YeUBJmekycsnTsq2RuFHSZU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>&nbsp;
 
 
   </head>
@@ -44,7 +45,7 @@
 
 
     {# Display django.contrib.messages as Bootstrap alerts #}
-    {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+    <span class="text-center">{% autoescape off %}{% bootstrap_messages %}{% endautoescape %}</span>
 
 
     {% block bootstrap4_content %}
