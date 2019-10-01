@@ -1,5 +1,5 @@
 from django.forms import ModelForm, CharField, CheckboxInput, ChoiceField
-from .models import Escalamedica, Escalasocial
+from .models import Escalamedica, Escalasocial, Escalaenfermagem
 from django.contrib.auth.models import User
 from django import forms
 from bootstrap4.widgets import RadioSelectButtonGroup
@@ -19,14 +19,21 @@ class EscalaSocialForm(ModelForm):
         required=True,
         label="",
         widget=RadioSelectButtonGroup,
-        choices=((1, '1'), (2, '2'), (3, '3')),
+        choices=((1, '1'), (2, '2'), (3, '>3')),
         initial=1,
     )
     class Meta:
         model = Escalasocial
         fields = '__all__'
-        exclude = ['paciente', 'medico', 'medico_id','datareg','numcatclass', 'pontuacao']
+        exclude = ['paciente', 'medico', 'medico_id','datareg', 'pontuacao', 'totalemrisco', 'totalforaderisco']
 
 
+class EscalaEnfermagemForm(ModelForm):
+    class Meta:
+        model = Escalaenfermagem
+        fields = '__all__'
+        exclude = ['paciente', 'medico', 'medico_id','datareg', 'soma1', 'soma2', 'soma3', 'soma4', 'somatotal' ]
+
+    
 
     

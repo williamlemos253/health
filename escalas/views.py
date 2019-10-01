@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import EscalaMedicaForm, EscalaSocialForm
-from .models import Escalamedica, Escalasocial
+from .forms import EscalaMedicaForm, EscalaSocialForm, EscalaEnfermagemForm
+from .models import Escalamedica, Escalasocial, Escalaenfermagem
 from pacientes.models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -246,7 +246,6 @@ def escalamedica(request, id_paciente):
 def escalamedicaresultado(request, id_paciente):
     paciente = Profile.objects.get(user=id_paciente)
     idade = calculate_age(paciente.birth_date)
-    print (idade)
     resultado = Escalamedica.objects.filter(paciente=id_paciente).order_by('datareg').last()
 
 
@@ -267,41 +266,224 @@ def escalamedicafiltrada(request, id):
 
 @login_required
 def escalasocial(request, id):
-    form = EscalaSocialForm()
+
     nomepaciente = Profile.objects.get(user=id)
 
     pontuacao = 0
-    if form.is_valid():
-        escala =  form.save(commit=False)
-        if escala.acamado == True:
-            pontuacao = pontuacao + 3
-        if escala.deficienciafisica == True:
-            pontuacao = pontuacao + 3
-        if escala.deficienciamental == True:
-            pontuacao = pontuacao + 3
-        if escala.saneamento == True:
-            pontuacao = pontuacao + 3
-        if escala.desnutricao == True:
-            pontuacao = pontuacao + 3
-        if escala.drogadicao == True:
-            pontuacao = pontuacao + 2
-        if escala.desempregado == True:
-            pontuacao = pontuacao + 2
-        if escala.analfabetismo == True:
-            pontuacao = pontuacao + 1
-        if  escala.menor == True:
-            pontuacao = pontuacao + 1
-        if  escala.maior == True:
-            pontuacao = pontuacao + 1
-        if  escala.hipertensao == True:
-            pontuacao = pontuacao + 1
+    total = 0
+
+    if request.method =='POST':
+        form = EscalaSocialForm(request.POST)
+        print (form.errors)
+        if form.is_valid():
+            print("é valido")
+            escala =  form.save(commit=False)
             
-        pontuacao = pontuacao + int(moradores)
+            escala.paciente = nomepaciente.user
+            escala.medico = request.user.last_name
+            escala.medico_id = request.user.id
 
-        escala.save()
-        
 
-        messages.success(request, 'Dados da escala de coelho cadastrados com sucesso')
-        return redirect("/escaladecoelhoresultado/"+str(id))
+            if escala.acamado == True:
+                pontuacao = pontuacao + 3
+                total = total +1
+            if escala.deficienciafisica == True:
+                pontuacao = pontuacao + 3
+                total = total +1
+            if escala.deficienciamental == True:
+                pontuacao = pontuacao + 3
+                total = total +1
+            if escala.saneamento == True:
+                pontuacao = pontuacao + 3
+                total = total +1
+            if escala.desnutricao == True:
+                pontuacao = pontuacao + 3
+                total = total +1
+            if escala.drogadicao == True:
+                pontuacao = pontuacao + 2
+                total = total +1
+            if escala.desempregado == True:
+                pontuacao = pontuacao + 2
+                total = total +1
+            if escala.analfabetismo == True:
+                pontuacao = pontuacao + 1
+                total = total +1
+            if  escala.menor == True:
+                pontuacao = pontuacao + 1
+                total = total +1
+            if  escala.maior == True:
+                pontuacao = pontuacao + 1
+                total = total +1
+            if  escala.hipertensao == True:
+                pontuacao = pontuacao + 1
+                total = total +1
+
+            totalemrisco = total
+
+            if escala.moradores > 1:
+                totalemrisco = totalemrisco + 1
+
+            totalforaderisco = 12 - totalemrisco 
+                
+            pontuacao = pontuacao + int(escala.moradores)
+
+
+            escala.totalemrisco = totalemrisco
+            escala.totalforaderisco = totalforaderisco
+            escala.pontuacao = pontuacao
+
+            escala.save()
+
+            messages.success(request, 'Dados da escala Psicosocial cadastrados com sucesso')
+            return redirect("/escalasocialresultado/"+str(id))
+
+    else:
+        form = EscalaSocialForm()   
+
+            
 
     return render (request, 'escalasocial.html', {'paciente':nomepaciente.user.last_name, 'form':form})
+
+
+@login_required
+def escalasocialresultado(request, id):
+    resultado = Escalasocial.objects.filter(paciente=id).last()
+    usuario = Profile.objects.get(id=id)
+
+    idade = calculate_age(usuario.birth_date)
+
+    return render (request, 'escalasocialresultado.html', {'resultado': resultado, 'idade':idade})
+
+
+@login_required
+def resumo(request, id):
+    resultados = Escalamedica.objects.filter(paciente=id).last()
+    resultadosocial = Escalasocial.objects.filter(paciente=id).last()
+    usuario = Profile.objects.get(id=id)
+
+    sexo = usuario.sexo
+    idade = calculate_age(usuario.birth_date)
+
+    return render (request, 'resumo.html', {'resultadosocial':resultadosocial, 'resultados': resultados, 'idade':idade, 'sexo': sexo })
+
+
+
+@login_required
+def escalaenfermagem(request, id):
+    nomepaciente = User.objects.get(id=id)
+
+    nomepaciente = nomepaciente.last_name
+
+    if request.method =='POST':
+        form = EscalaEnfermagemForm()
+        if form.is_valid(request.POST):
+            escala = form.save(commit=False)
+            soma1 = 0
+            soma2 = 0
+            soma3 = 0
+            soma4 = 0
+            somatotal = 0
+
+            
+            escala.somatotal = escala.estadomental + escala.oxigenacao + escala.sinaisvitais + escala.motibilidade \
+            + escala.deambulacao + escala.alimentacao + escala.cuidadocorporal + escala.eliminacao + escala.terapeutica
+
+            escala.paciente = nomepaciente.user
+            escala.medico = request.user.last_name
+            escala.medico_id = request.user.id
+            
+            #soma1
+            if int(escala.estadomental) == 1:
+                soma1 = soma1 + 1
+            if int(escala.oxigenacao) == 1:
+                soma1 = soma1 + 1
+            if int(escala.sinaisvitais) == 1:
+                soma1 = soma1 + 1
+            if int(escala.motibilidade) == 1:
+                soma1 = soma1 + 1
+            if int(escala.deambulacao) == 1:
+                soma1 = soma1 + 1
+            if int(escala.alimentacao) == 1:
+                soma1 = soma1 + 1
+            if int(escala.cuidadocorporal) == 1:
+                soma1 = soma1 + 1
+            if int(escala.eliminacao) == 1:
+                soma1 = soma1 + 1
+            if int(escala.terapeutica) == 1:
+                soma1 = soma1 + 1
+            
+            #soma2
+            if int(escala.estadomental) == 2:
+                soma2 = soma2 + 1
+            if int(escala.oxigenacao) == 2:
+                soma2 = soma2 + 1
+            if int(escala.sinaisvitais) == 2:
+                soma2 = soma2 + 1
+            if int(escala.motibilidade) == 2:
+                soma2 = soma2 + 1
+            if int(escala.deambulacao) == 2:
+                soma2 = soma2 + 1
+            if int(escala.alimentacao) == 2:
+                soma2 = soma2 + 1
+            if int(escala.cuidadocorporal) == 2:
+                soma2 = soma2 + 1
+            if int(escala.eliminacao) == 2:
+                soma2 = soma2 + 1
+            if int(escala.terapeutica) == 2:
+                soma2 = soma2 + 1
+                
+            #soma3
+            if int(escala.estadomental) == 3:
+                soma3 = soma3 + 1
+            if int(escala.oxigenacao) == 3:
+                soma3 = soma3 + 1
+            if int(escala.sinaisvitais) == 3:
+                soma3 = soma3 + 1
+            if int(escala.motibilidade) == 3:
+                soma3 = soma3 + 1
+            if int(escala.deambulacao) == 3:
+                soma3 = soma3 + 1
+            if int(escala.alimentacao) == 3:
+                soma3 = soma3 + 1
+            if int(escala.cuidadocorporal) == 3:
+                soma3 = soma3 + 1
+            if int(escala.eliminacao) == 3:
+                soma3 = soma3 + 1
+            if int(escala.terapeutica) == 3:
+                soma3 = soma3 + 1
+                
+            #soma4
+            if int(escala.estadomental) == 4:
+                soma4 = soma4 + 1
+            if int(escala.oxigenacao) == 4:
+                soma4 = soma4 + 1
+            if int(escala.sinaisvitais) == 4:
+                soma4 = soma4 + 1
+            if int(escala.motibilidade) == 4:
+                soma4 = soma4 + 1
+            if int(escala.deambulacao) == 4:
+                soma4 = soma4 + 1
+            if int(escala.alimentacao) == 4:
+                soma4 = soma4 + 1
+            if int(escala.cuidadocorporal) == 3:
+                soma4 = soma4 + 1
+            if int(escala.eliminacao) == 4:
+                soma4 = soma4 + 1
+            if int(escala.terapeutica) == 4:
+                soma4 = soma4 + 1
+
+            escala.soma1 = soma1
+            escala.soma2 = soma2
+            escala.soma3= soma3
+            escala.soma4 = soma4
+
+            escala.save()
+                
+     
+            messages.success(request, 'Dados da escala de enfermagem cadastrados com sucesso')
+            return redirect('/escalaenfermagemresultado/'+str(id))
+
+    else:
+        form = EscalaEnfermagemForm()
+
+    return render (request, 'escalaenfermagem.html', { 'form':form, 'paciente':nomepaciente})

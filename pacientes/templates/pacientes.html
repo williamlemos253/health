@@ -32,8 +32,10 @@
       <th data-field="data_inclusao" data-sortable="true" data-formatter="dateFormat">Adesão</th>
       <th data-field="cpf">CPF</th>
       <th data-field="user__id" data-formatter="operateFormatter">Saúde</th>
-      <th data-field="user__id" data-formatter="operateFormatter2">Médica</th>
+      <th data-field="user__id" data-formatter="operateFormatter2">&nbsp;&nbsp;Médica&nbsp;&nbsp;</th>
       <th data-field="user__id" data-formatter="operateFormatter3">Psicosocial</th>
+      <th data-field="user__id" data-formatter="operateFormatter4">Enfermagem</th>
+      <th data-field="user__id" data-formatter="operateFormatter5">Resumo</th>
     </tr>
   </thead>
 </table>
@@ -82,7 +84,7 @@
       '<i class="fas fa-user-md fa-2x"></i>',
       '</a>',
       ' ',
-      '<a class="remove" href="/escalamedicaresultado/' + value +'" title="Escala Médica">',
+      '<a class="remove" href="/escalamedicaresultado/' + value +'" title="Resultado da Escala Médica">',
       '<i class="far fa-address-card fa-2x"></i>',
       '</a>',
     ].join('')
@@ -93,6 +95,30 @@
     return [
       '<a class="remove" href="/escalasocial/' + value +'" title="Escala Psicosocial">',
       '<i class="fas fa-user-friends fa-2x"></i>',
+      '</a>',
+      ' ',
+      '<a class="remove" href="/escalasocialresultado/' + value +'" title="Resultado da Escala Psicosocial">',
+      '<i class="far fa-address-card fa-2x"></i>',
+      '</a>',
+    ].join('')
+  }
+
+  function operateFormatter4(value, row, index) {
+    return [
+      '<a class="remove" href="/escalaenfermagem/' + value +'" title="Escala Psicosocial">',
+      '<i class="fas fa-user-friends fa-2x"></i>',
+      '</a>',
+      ' ',
+      '<a class="remove" href="/escalaenfermagemresultado/' + value +'" title="Resultado da Escala Psicosocial">',
+      '<i class="far fa-address-card fa-2x"></i>',
+      '</a>',
+    ].join('')
+  }
+
+   function operateFormatter5(value, row, index) {
+    return [
+      '<a class="remove" href="/resumo/' + value +'" title="Resumo das Escalas">',
+      '<i class="fas fa-tachometer-alt fa-2x"></i>',
       '</a>',
     ].join('')
   }

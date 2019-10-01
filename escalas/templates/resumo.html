@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{# cadastra os dados dos pacientes da fisioterpia na table Afisioterapeutas de acorda com a tabela de Katz #}
+
+{% block content %}
+
+<style>
+span.step {
+  background: #33CCCC;
+  border-radius: 1.0em;
+  -moz-border-radius: 1.0em;
+  -webkit-border-radius: 1.0em;
+  color: #ffffff;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 2.3em;
+  margin-right: 5px;
+  text-align: center;
+  width: 2.3em; 
+}
+
+</style>
+
+<br>
+<div class="row">
+        <div class="col-12">
+
+            <h3 class="text-center">Resumo geral do paciente: {{ resultados.paciente.last_name }}</h3>
+            <h4 class="text-center">Idade: {{idade}} anos | Sexo:   {% if sexo == "F" %}Feminino {% else %} Masculino {% endif %} </h4>
+            <br>
+        <hr>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <h4 class="text-center">Escala Médica</h4>
+            <h4 class="text-center">Nº de problemas por grau de severidade</h4>
+            <canvas id="CirsgChart" width="200" height="200"></canvas>
+            <script>
+            // And for a doughnut chart
+            var ctx = document.getElementById("CirsgChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                labels: ["Sem Problemas", "Problemas Leves", "Problemas Moderados", "Problemas Graves", "Problemas Extremamente Graves"],
+                datasets: [{
+                    backgroundColor: [
+                    "#CCCCCC",
+                    "#99CCCC",
+                    "#33CCCC",
+                    "#CC6699",
+                    "#CC3366"
+                    ],
+                    data: [ {{resultados.numcatsev0}},  {{resultados.numcatsev1}}, {{resultados.numcatsev2}}, {{resultados.numcatsev3}}, {{resultados.numcatsev4}}]
+                }]
+                }
+            });
+            </script>
+            <br>
+            <h5 class="text-center">Pontuação Total:&nbsp;<span class="step">{{ resultados.pontuacao }}</span></h5>
+            <h4 class="text-center">Data/Hora: {{ resultados.datareg|date:"d/m/Y h:m" }} </h4>
+            <p class="text-center">
+                <a href="/escalamedicaresultado/{{resultados.paciente.id}}" class="btn btn-outline-secondary" role="button">Ver completo</a>
+            </p>
+
+        </div>
+
+        {# inicio da escla psicosocial #}
+
+        <div class="col-12 col-md-6">
+        <h4 class="text-center">Escala Psicosocial</h4>
+        <h4 class="text-center">Nº de áreas em risco familiar</h4>
+        <canvas id="CirsgChart2" width="200" height="200"></canvas>
+        <script>
+        // And for a doughnut chart
+        var ctx = document.getElementById("CirsgChart2").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+            labels: ["Fora de Risco", "Risco Familiar"],
+            datasets: [{
+                backgroundColor: [
+                "#CCCCCC",
+                "#CC3366"
+                ],
+                data: [{{ resultadosocial.totalforaderisco }}, {{ resultadosocial.totalemrisco }}]
+            }]
+            }
+        });
+        </script>
+        <br>
+        <h5 class="text-center">Índice de gravidade:{% if resultado.pontuacao <= 6 %}
+                                    <b class="alert alert-success">R1 - Risco menor </b>
+                                {% elif resultado.pontuacao <= 9 %}
+                                    <b class="alert alert-warning"> R2 - Risco médio</b>
+                                {% else %}
+                                    <b class="alert alert-danger"> R3 - Risco máximo </b>
+                                {%  endif  %}
+        </h5>
+        <br>
+        <h4 class="text-center">Data/Hora: {{ resultadosocial.datareg|date:"d/m/Y h:m" }} </h4>
+        <p class="text-center">
+            <a href="/escalasocialresultado/{{resultados.paciente.id}}" class="btn btn-outline-secondary" role="button">Ver completo</a>
+        </p>
+        <br><br>
+    </div>
+
+
+
+
+
+</div>
+
+{% endblock %}
