@@ -274,7 +274,6 @@ def escalasocial(request, id):
 
     if request.method =='POST':
         form = EscalaSocialForm(request.POST)
-        print (form.errors)
         if form.is_valid():
             print("é valido")
             escala =  form.save(commit=False)
@@ -359,24 +358,26 @@ def escalasocialresultado(request, id):
 def resumo(request, id):
     resultados = Escalamedica.objects.filter(paciente=id).last()
     resultadosocial = Escalasocial.objects.filter(paciente=id).last()
+    resultadoenfermagem = Escalaenfermagem.objects.filter(paciente=id).last()
     usuario = Profile.objects.get(id=id)
 
     sexo = usuario.sexo
     idade = calculate_age(usuario.birth_date)
 
-    return render (request, 'resumo.html', {'resultadosocial':resultadosocial, 'resultados': resultados, 'idade':idade, 'sexo': sexo })
+    return render (request, 'resumo.html', {'resultadoenfermagem':resultadoenfermagem,'resultadosocial':resultadosocial, 'resultados': resultados, 'idade':idade, 'sexo': sexo })
 
 
 
 @login_required
 def escalaenfermagem(request, id):
-    nomepaciente = User.objects.get(id=id)
+    nomepaciente = Profile.objects.get(id=id)
 
-    nomepaciente = nomepaciente.last_name
+
 
     if request.method =='POST':
-        form = EscalaEnfermagemForm()
-        if form.is_valid(request.POST):
+        form = EscalaEnfermagemForm(request.POST)
+        print ('chegou aqui', form.errors)
+        if form.is_valid():
             escala = form.save(commit=False)
             soma1 = 0
             soma2 = 0
@@ -487,3 +488,11 @@ def escalaenfermagem(request, id):
         form = EscalaEnfermagemForm()
 
     return render (request, 'escalaenfermagem.html', { 'form':form, 'paciente':nomepaciente})
+
+
+@login_required
+def escalaenfermagemresultado(request, id):
+    resultado = Escalaenfermagem.objects.filter(paciente=id).order_by('datareg').last()
+    usuario = Profile.objects.get(user=id)
+    idade = calculate_age(usuario.birth_date)
+    return render (request, 'escalaenfermagemresultado.html', {'resultados':resultado, 'idade':idade})

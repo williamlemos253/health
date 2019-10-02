@@ -32,7 +32,7 @@ class EscalaEnfermagemForm(ModelForm):
     class Meta:
         model = Escalaenfermagem
         fields = '__all__'
-        exclude = ['paciente', 'medico', 'medico_id','datareg', 'soma1', 'soma2', 'soma3', 'soma4', 'somatotal' ]
+        exclude = ['paciente', 'medico', 'medico_id','datareg', 'soma1', 'soma2', 'soma3', 'soma4','somatotal' ]
 
     
 

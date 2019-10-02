@@ -33,11 +33,19 @@ class DeclaracaodesaudeForm(ModelForm):
 
 class UserForm(ModelForm):
     password1=forms.CharField(widget=forms.PasswordInput(), label='Senha', )
+    last_name = forms.CharField(label='Nome Completo', required=True)
+    
     class Meta:
         model = User
-        fields = ('first_name', 'email', 'password')
+        fields = ('last_name', 'email', 'password')
 
 class ProfileForm(ModelForm):
+    sexo = forms.ChoiceField(
+        label ="sexo",
+        required=True,
+        choices=(('M', 'Masculino'), ('F', 'Feminino')),
+        initial=1,
+    )
     class Meta:
         model = Profile
         fields = ('cpf', 'birth_date', 'empresa', 'sexo', 'data_inclusao')
