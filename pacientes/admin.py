@@ -10,7 +10,7 @@ from import_export.widgets import ForeignKeyWidget
 from import_export.results import RowResult
 
 
-
+admin.site.unregister(User)
 class UserResource(resources.ModelResource):
     def import_row(self, row, instance_loader, **kwargs):
         # overriding import_row to ignore errors and skip rows that fail to import
