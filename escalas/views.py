@@ -252,16 +252,38 @@ def escalamedicaresultado(request, id_paciente):
     
     return render (request, 'escalamedicaresultado.html', { 'resultados':resultado, 'idade':idade})
 
+
 @login_required
 def escalamedicaresultadosanteriores(request, id):
     resultado = Escalamedica.objects.filter(paciente=id).order_by('datareg').reverse()
     return render (request, 'escalamedicaresultadosanteriores.html', {'resultados':resultado})
+
+@login_required
+def escalaenfermagemresultadosanteriores(request, id):
+    resultado = Escalaenfermagem.objects.filter(paciente=id).order_by('datareg').reverse()
+    return render (request, 'escalaenfermagemresultadosanteriores.html', {'resultados':resultado})
+
+
+@login_required
+def escalasocialresultadosanteriores(request, id):
+    resultado = Escalasocial.objects.filter(paciente=id).order_by('datareg').reverse()
+    return render (request, 'escalasocialresultadosanteriores.html', {'resultados':resultado})
 
 
 @login_required
 def escalamedicafiltrada(request, id):
     resultado = Escalamedica.objects.get(id=id)
     return render (request, 'escalamedica.html', {'resultados':resultado})
+
+@login_required
+def escalaenfermagemfiltrada(request, id):
+    resultado = Escalaenfermagem.objects.get(id=id)
+    return render (request, 'escalaenfermagem.html', {'resultados':resultado})
+
+@login_required
+def escalasocialfiltrada(request, id):
+    resultado = Escalasocial.objects.get(id=id)
+    return render (request, 'escalasocial.html', {'resultados':resultado})
 
 
 @login_required
