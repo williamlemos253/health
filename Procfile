@@ -1,1 +1,1 @@
-web: gunicorn quemsoueu.wsgi --log-file -
+web: gunicorn health.wsgi

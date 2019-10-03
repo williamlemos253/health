@@ -135,3 +135,7 @@ LOGOUT_REDIRECT_URL = '/'
 DATA_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 15  # 15M
 FILE_UPLOAD_MAX_MEMORY_SIZE = DATA_UPLOAD_MAX_MEMORY_SIZE
 SERVER_MAX_ITEM_LENGTH = 1024 * 1024 * 15
+
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
