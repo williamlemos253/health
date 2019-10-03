@@ -7,7 +7,19 @@ from django.db import transaction
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.http import JsonResponse
+from django.contrib.auth.decorators import user_passes_test
 
+
+
+
+def group_required(*group_names):
+    """Requires user membership in at least one of the groups passed in."""
+    def in_groups(u):
+        if u.is_authenticated:
+            if bool(u.groups.filter(name__in=group_names)) | u.is_superuser:
+                return True
+        return False
+    return user_passes_test(in_groups)
 
 # Create your views here.
 @login_required
@@ -55,6 +67,7 @@ def consultadeclaracaodesaude(request, id):
 
 
 @login_required
+@group_required('admins', 'colaborador')
 def create_profile(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST)
@@ -87,6 +100,7 @@ def create_profile(request):
 
 # criptografa as senhas importados direto no banco de dados 
 @login_required
+@group_required('admins', 'colaborador')
 def hashsenhas(request):
     for user in User.objects.all():
         user.set_password(user.password)
@@ -98,6 +112,7 @@ def hashsenhas(request):
 
 
 @login_required
+@group_required('admins', 'colaborador')
 def pacientes(request):
     pacientes = Profile.objects.all()
     pacientes = pacientes.filter(user__is_staff=False)
@@ -107,6 +122,7 @@ def pacientes(request):
 
 
 @login_required
+@group_required('admins', 'colaborador')
 def jsonPacientes(request):
     pacientes = Profile.objects.select_related()
     pacientes = pacientes.filter(user__is_staff=False).values('user__last_name','sexo','birth_date','data_inclusao','cpf', 'user__id')
@@ -117,3 +133,5 @@ def jsonPacientes(request):
 
 
     return JsonResponse(pacientes_list, safe=False)
+
+

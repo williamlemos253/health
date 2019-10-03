@@ -78,11 +78,14 @@ WSGI_APPLICATION = 'health.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-       
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
-        
+      'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DB_NAME', 'wiezpjee'),
+        'USER': os.environ.get('DB_USER', 'wiezpjee'),
+        'PASSWORD': os.environ.get('DB_PASS', 'DHNMQ2-GnvaIH61jNnepyKU7bOa1t83T'),
+        'HOST': 'tuffi.db.elephantsql.com',
+        'PORT': '5432'
+
     }
 }
 

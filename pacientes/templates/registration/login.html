@@ -10,8 +10,8 @@
         <div class="col-md-4 offset-md-4 align-self-center">
 
             {% if user.is_authenticated %}
-                <h2> Olá {{ user.username }}! </h2>
-                <p><a href="{% url 'logout' %}">logout</a></p>
+                <h4> Olá {{ user.last_name }}! </h4>
+                <p><a href="{% url 'logout' %}">Clique aqui para sair do sistema</a></p>
             {% else %}
 
 

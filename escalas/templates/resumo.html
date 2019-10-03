@@ -20,22 +20,27 @@ span.step {
   width: 2.3em; 
 }
 
+.fixaTamanho{
+    height: 46px;
+}
+
 
 </style>
 
 <br>
 
     <div class="row">
+       
             <div class="col-12">
-                <h3 class="text-center">Resumo geral do paciente: {{ resultados.paciente.last_name }}</h3>
-                <h4 class="text-center">Idade: {{idade}} anos | Sexo:   {% if sexo == "F" %}Feminino {% else %} Masculino {% endif %} </h4>
+                <h5 class="text-center">Resumo geral do paciente: {{ resultados.paciente.last_name }}</h5>
+                <h5 class="text-center">Idade: {{idade}} anos | Sexo:   {% if sexo == "F" %}Feminino {% else %} Masculino {% endif %} </h5>
                 <br>
             </div>
 
             <div class="col-12 col-md-6 border">
+             {% if resultados %}
                 <h4 class="text-center">Escala Médica</h4>
-                <h4 class="text-center">Nº de problemas por grau de severidade</h4>
-                <canvas id="CirsgChart" width="150" height="150"></canvas>
+                <canvas id="CirsgChart" width="150" height="150" ></canvas>
                 <script>
                 // And for a doughnut chart
                 var ctx = document.getElementById("CirsgChart").getContext('2d');
@@ -44,6 +49,7 @@ span.step {
                     data: {
                     labels: ["Sem Problemas", "Problemas Leves", "Problemas Moderados", "Problemas Graves", "Problemas Extremamente Graves"],
                     datasets: [{
+                        label: "Nº de problemas por grau de severidade",
                         backgroundColor: [
                         "#CCCCCC",
                         "#99CCCC",
@@ -53,6 +59,13 @@ span.step {
                         ],
                         data: [ {{resultados.numcatsev0}},  {{resultados.numcatsev1}}, {{resultados.numcatsev2}}, {{resultados.numcatsev3}}, {{resultados.numcatsev4}}]
                     }]
+                    },
+                    options: {
+                    title: {
+                        display: true,
+                        text: 'Nº de problemas por grau de severidade'
+                    }
+
                     }
                 });
                 </script>
@@ -60,16 +73,22 @@ span.step {
                 <p class="text-center">
                     <a href="/escalamedicaresultado/{{resultados.paciente.id}}" class="btn btn-outline-secondary" role="button">Ver completo</a>
                 </p>
-                <br>
                 <h5 class="text-center">Pontuação Total:&nbsp;<span class="step">{{ resultados.pontuacao }}</span></h5>
                 <h4 class="text-center">Data/Hora: {{ resultados.datareg|date:"d/m/Y h:m" }} </h4>
+            {% else %}
+            <br>
+                <h5 class="text-center">A Escala Médica ainda não foi preenchida.</h5>
+                <br>
+            {%  endif %}
+
 
             </div>
-
+        
            
 
     <div class="col-12 col-md-6 border">
-        <h4 class="text-center">Escala Enfermagem<br> Nº de problemas por nível de cuidado</h4>
+    {% if resultadoenfermagem %}
+        <h4 class="text-center">Escala Enfermagem</h4>
         <canvas id="CirsgChart3" width="150" height="150"></canvas>
             <script>
             // And for a doughnut chart
@@ -87,7 +106,14 @@ span.step {
                     ],
                     data: [{{ resultadoenfermagem.soma1 }}, {{ resultadoenfermagem.soma2 }}, {{ resultadoenfermagem.soma3 }}, {{ resultadoenfermagem.soma4 }}]
                 }]
-                }
+                },
+                    options: {
+                    title: {
+                        display: true,
+                        text: 'Nº de problemas por nível de cuidado'
+                    }
+
+                    }
             });
             </script>
             <br>
@@ -95,65 +121,79 @@ span.step {
                 <a href="/escalaenfermagemresultado/{{resultadoenfermagem.paciente.id}}" class="btn btn-outline-secondary" role="button">Ver completo</a>
             </p>
         {# identifica o nível de complexidade asssitencial que o paciente necessita #}
-            <br>
             {% if resultadoenfermagem.somatotal <= 14 %}
-            <h5 class="text-center">O paciente necessita de cuidados <b class="alert alert-success">Mínimos</b></h5>
+            <h5 class="text-center fixaTamanho">O paciente necessita de cuidados <b class="alert alert-success">Mínimos</b></h5>
             {% elif resultadoenfermagem.somatotal <= 20 %}
-            <h5>O paciente necessita de cuidados <b class="alert alert-warning">Intermediárias</b></h5>
+            <h5 class="text-center fixaTamanho">O paciente necessita de cuidados <b class="alert alert-warning">Intermediárias</b></h5>
             {% elif resultadoenfermagem.somatotal <= 26 %}
-            <h5>O paciente necessita de cuidados de <b class="alert alert-warning">Alta dependência</b></h5>
+            <h5 class="text-center fixaTamanho">O paciente necessita de cuidados de <b class="alert alert-warning">Alta dependência</b></h5>
             {% elif resultadoenfermagem.somatotal <= 31 %}
-            <h5>O paciente necessita de cuidados <b class="alert alert-danger">Semi-intensivos</b></h5>
+            <h5 class="text-center fixaTamanho">O paciente necessita de cuidados <b class="alert alert-danger">Semi-intensivos</b></h5>
             {% else %}
-            <h5>O paciente necessita de cuidados <b class="alert alert-danger">Intensivos</b></h5>
+            <h5 class="text-center fixaTamanho">O paciente necessita de cuidados <b class="alert alert-danger">Intensivos</b></h5>
             {%  endif  %}
-            <br>
             <h4 class="text-center">Data/Hora: {{ resultadosocial.datareg|date:"d/m/Y h:m" }} </h4>
             
             <br><br>
+        {% else %}
+        <br>
+            <h5 class="text-center">A Escalade de Enfermagem ainda não foi preenchida. </h5>
+        <br>
+        {% endif %}
         </div>
 
 
          {# inicio da escla psicosocial #}
 
             <div class="col-12 col-md-6 border">
-            <h4 class="text-center">Escala Psicosocial</h4>
-            <h4 class="text-center">Nº de áreas em risco familiar</h4>
-            <canvas id="CirsgChart2" width="150" height="150"></canvas>
-            <script>
-            // And for a doughnut chart
-            var ctx = document.getElementById("CirsgChart2").getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                labels: ["Fora de Risco Familiar", "Em Risco Familiar"],
-                datasets: [{
-                    backgroundColor: [
-                    "#CCCCCC",
-                    "#CC3366"
-                    ],
-                    data: [{{ resultadosocial.totalforaderisco }}, {{ resultadosocial.totalemrisco }}]
-                }]
-                }
-            });
-            </script>
-            <br>
-            <p class="text-center">
-                <a href="/escalasocialresultado/{{resultados.paciente.id}}" class="btn btn-outline-secondary" role="button">Ver completo</a>
-            </p>
-            <br>
-            <h6 class="text-center">{% if resultado.pontuacao <= 6 %}
+             {% if resultadoenfermagem %}
+                <h4 class="text-center">Escala Psicosocial</h4>
+                <canvas id="CirsgChart2" width="150" height="150"></canvas>
+                <script>
+                // And for a doughnut chart
+                var ctx = document.getElementById("CirsgChart2").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                    labels: ["Fora de Risco Familiar", "Em Risco Familiar"],
+                    datasets: [{
+                        backgroundColor: [
+                        "#CCCCCC",
+                        "#CC3366"
+                        ],
+                        data: [{{ resultadosocial.totalforaderisco }}, {{ resultadosocial.totalemrisco }}]
+                    }]
+                    },
+                        options: {
+                        title: {
+                            display: true,
+                            text: 'Nº de áreas em risco familiar'
+                        }
+
+                        }
+                });
+                </script>
+                <br>
+                <p class="text-center">
+                    <a href="/escalasocialresultado/{{resultados.paciente.id}}" class="btn btn-outline-secondary" role="button">Ver completo</a>
+                </p>
+                <br>
+                <h6 class="text-center fixaTamanho">{% if resultado.pontuacao <= 6 %}
                                         <b class="alert alert-success">R1 - Risco menor </b>
-                                    {% elif resultado.pontuacao <= 9 %}
-                                        <b class="alert alert-warning"> R2 - Risco médio</b>
-                                    {% else %}
-                                        <b class="alert alert-danger">R3 - Risco máximo </b>
-                                    {%  endif  %}
-            </h6>
-            <br>
-            <h4 class="text-center">Data/Hora: {{ resultadosocial.datareg|date:"d/m/Y h:m" }} </h4>
-            
-            <br>
+                                        {% elif resultado.pontuacao <= 9 %}
+                                            <b class="alert alert-warning"> R2 - Risco médio</b>
+                                        {% else %}
+                                            <b class="alert alert-danger">R3 - Risco máximo </b>
+                                        {%  endif  %}
+                </h6>
+                <h4 class="text-center">Data/Hora: {{ resultadosocial.datareg|date:"d/m/Y h:m" }} </h4>
+                
+                <br>
+            {% else %}  
+                        <br>
+                        <h5 class="text-center">A Escala Psicosocial ainda não foi preenchida</h5>
+                        <br>
+            {% endif %}
         </div>
 
 
