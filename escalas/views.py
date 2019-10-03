@@ -247,7 +247,7 @@ def escalamedicaresultado(request, id_paciente):
     paciente = Profile.objects.get(user=id_paciente)
     idade = calculate_age(paciente.birth_date)
     resultado = Escalamedica.objects.filter(paciente=id_paciente).order_by('datareg').last()
-    if resultado.paciente is None:
+    if resultado is None:
         return render (request, 'embranco.html')
 
 
@@ -372,7 +372,7 @@ def escalasocial(request, id):
 def escalasocialresultado(request, id):
     resultado = Escalasocial.objects.filter(paciente=id).last()
     usuario = Profile.objects.get(id=id)
-    if resultado.paciente is None:
+    if resultado is None:
         return render (request, 'embranco.html')
 
     idade = calculate_age(usuario.birth_date)
@@ -519,7 +519,7 @@ def escalaenfermagem(request, id):
 @login_required
 def escalaenfermagemresultado(request, id):
     resultado = Escalaenfermagem.objects.filter(paciente=id).order_by('datareg').last()
-    if resultado.paciente is None:
+    if resultado is None:
         return render (request, 'embranco.html')
     usuario = Profile.objects.get(user=id)
     idade = calculate_age(usuario.birth_date)
