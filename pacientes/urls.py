@@ -9,5 +9,5 @@ urlpatterns = [
     path('pacientes', pacientes),
     path('consultadeclaracaodesaude/<int:id>', consultadeclaracaodesaude),
     path('jsonpacientes', jsonPacientes),
-    path('jsonescalamedica/<int:id>', jsonEscalamedica),
+    path('jsonescalamedica', jsonEscalamedica),
 ]

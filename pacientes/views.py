@@ -137,20 +137,26 @@ def jsonPacientes(request):
 
 
 @login_required
-def jsonEscalamedica(request, id):
+def jsonEscalamedica(request):
 
-    escalas = Escalamedica.objects.filter(paciente=id).order_by('datareg').reverse()
-
-    escalas = escalas.values('pontuacao')
+    pacientes = User.objects.select_related('Escalamedica')
 
 
+    pacientes = pacientes.values('last_name','profile__sexo','profile__birth_date','profile__data_inclusao','profile__cpf', \
+     'id','escalamedica__pontuacao','escalasocial__pontuacao')
 
-    print ("vera aqui", escalas)
+    
+
+    
+
+    print ("vera aqui", pacientes)
+
+ # important: convert the QuerySet to a list object
+    pacientes_list = list(pacientes)
 
 
-    escalas_list = list(escalas)  # important: convert the QuerySet to a list object
 
 
-    return JsonResponse(escalas_list[0], safe=False)
+    return JsonResponse(pacientes_list, safe=False)
 
 
