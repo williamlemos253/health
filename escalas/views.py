@@ -247,21 +247,45 @@ def escalamedicaresultado(request, id_paciente):
     paciente = Profile.objects.get(user=id_paciente)
     idade = calculate_age(paciente.birth_date)
     resultado = Escalamedica.objects.filter(paciente=id_paciente).order_by('datareg').last()
+    if resultado is None:
+        return render (request, 'embranco.html')
 
 
     
     return render (request, 'escalamedicaresultado.html', { 'resultados':resultado, 'idade':idade})
+
 
 @login_required
 def escalamedicaresultadosanteriores(request, id):
     resultado = Escalamedica.objects.filter(paciente=id).order_by('datareg').reverse()
     return render (request, 'escalamedicaresultadosanteriores.html', {'resultados':resultado})
 
+@login_required
+def escalaenfermagemresultadosanteriores(request, id):
+    resultado = Escalaenfermagem.objects.filter(paciente=id).order_by('datareg').reverse()
+    return render (request, 'escalaenfermagemresultadosanteriores.html', {'resultados':resultado})
+
+
+@login_required
+def escalasocialresultadosanteriores(request, id):
+    resultado = Escalasocial.objects.filter(paciente=id).order_by('datareg').reverse()
+    return render (request, 'escalasocialresultadosanteriores.html', {'resultados':resultado})
+
 
 @login_required
 def escalamedicafiltrada(request, id):
     resultado = Escalamedica.objects.get(id=id)
     return render (request, 'escalamedica.html', {'resultados':resultado})
+
+@login_required
+def escalaenfermagemfiltrada(request, id):
+    resultado = Escalaenfermagem.objects.get(id=id)
+    return render (request, 'escalaenfermagem.html', {'resultados':resultado})
+
+@login_required
+def escalasocialfiltrada(request, id):
+    resultado = Escalasocial.objects.get(id=id)
+    return render (request, 'escalasocial.html', {'resultados':resultado})
 
 
 @login_required
@@ -348,6 +372,8 @@ def escalasocial(request, id):
 def escalasocialresultado(request, id):
     resultado = Escalasocial.objects.filter(paciente=id).last()
     usuario = Profile.objects.get(id=id)
+    if resultado is None:
+        return render (request, 'embranco.html')
 
     idade = calculate_age(usuario.birth_date)
 
@@ -493,6 +519,8 @@ def escalaenfermagem(request, id):
 @login_required
 def escalaenfermagemresultado(request, id):
     resultado = Escalaenfermagem.objects.filter(paciente=id).order_by('datareg').last()
+    if resultado is None:
+        return render (request, 'embranco.html')
     usuario = Profile.objects.get(user=id)
     idade = calculate_age(usuario.birth_date)
     return render (request, 'escalaenfermagemresultado.html', {'resultados':resultado, 'idade':idade})

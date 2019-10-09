@@ -78,14 +78,11 @@ WSGI_APPLICATION = 'health.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-      'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME', 'd6prllp2ug7eis'),
-        'USER': os.environ.get('DB_USER', 'xunwqvnuxeryre'),
-        'PASSWORD': os.environ.get('DB_PASS', '9420a7df6528cf8ab1b1d792bf8ac73841304abf0fd397546e5f4dc07b95c876'),
-        'HOST': 'ec2-174-129-218-200.compute-1.amazonaws.com',
-        'PORT': '5432'
-
+    'default': {
+       
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
+        
     }
 }
 
@@ -135,7 +132,3 @@ LOGOUT_REDIRECT_URL = '/'
 DATA_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 15  # 15M
 FILE_UPLOAD_MAX_MEMORY_SIZE = DATA_UPLOAD_MAX_MEMORY_SIZE
 SERVER_MAX_ITEM_LENGTH = 1024 * 1024 * 15
-
-# Configure Django App for Heroku.
-import django_heroku
-django_heroku.settings(locals())

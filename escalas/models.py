@@ -55,7 +55,6 @@ class Escalasocial(models.Model):
     totalemrisco = models.PositiveSmallIntegerField()
     totalforaderisco = models.PositiveSmallIntegerField()
 
-
 class Escalaenfermagem(models.Model):
     paciente = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     medico =  models.CharField(max_length=150, verbose_name=("Médico"), blank=False)
@@ -75,4 +74,3 @@ class Escalaenfermagem(models.Model):
     soma3 = models.PositiveSmallIntegerField()
     soma4 = models.PositiveSmallIntegerField()
     somatotal = models.PositiveSmallIntegerField()
- 

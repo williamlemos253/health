@@ -6,7 +6,14 @@
     <div class="row mt-5">
         <div class="col">
             <h2>Ainda não foram cadastrados dados referentes a sua consulta</h2>
+            <button onclick="goBack()" class="btn btn-danger btn-lg"><i class="fas fa-arrow-left"></i>&nbsp;Voltar</button>
         </div>
     </div>
+
+    <script>
+        function goBack() {
+        window.history.back();
+        }
+    </script>
 
 {% endblock %}
