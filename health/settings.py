@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'health.wsgi.application'
 DATABASES = {
       'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME', 'd6prllp2ug7eis'),
-        'USER': os.environ.get('DB_USER', 'xunwqvnuxeryre'),
-        'PASSWORD': os.environ.get('DB_PASS', '9420a7df6528cf8ab1b1d792bf8ac73841304abf0fd397546e5f4dc07b95c876'),
-        'HOST': 'ec2-174-129-218-200.compute-1.amazonaws.com',
+        'NAME': os.environ.get('DB_NAME', 'wiezpjee'),
+        'USER': os.environ.get('DB_USER', 'wiezpjee'),
+        'PASSWORD': os.environ.get('DB_PASS', 'DHNMQ2-GnvaIH61jNnepyKU7bOa1t83T'),
+        'HOST': 'tuffi.db.elephantsql.com',
         'PORT': '5432'
 
     }

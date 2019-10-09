@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import DeclaracaodesaudeForm, UserForm, ProfileForm
 from .models import Declaracaodesaude, Profile
+from escalas.models import Escalamedica
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
@@ -124,7 +125,7 @@ def pacientes(request):
 @login_required
 @group_required('admins', 'colaborador')
 def jsonPacientes(request):
-    pacientes = Profile.filter(user__is_staff=False).values('user__last_name','sexo','birth_date','data_inclusao','cpf', 'user__id')
+    pacientes = Profile.objects.filter(user__is_staff=False).values('user__last_name','sexo','birth_date','data_inclusao','cpf', 'user__id')
 
 
 
@@ -137,14 +138,19 @@ def jsonPacientes(request):
 
 @login_required
 def jsonEscalamedica(request, id):
-    pacientes = Profile.objects.select_related()
-    pacientes = pacientes.filter(user__is_staff=False).values('user__last_name','sexo','birth_date','data_inclusao','cpf', 'user__id')
+
+    escalas = Escalamedica.objects.filter(paciente=id).order_by('datareg').reverse()
+
+    escalas = escalas.values('pontuacao')
 
 
 
-    pacientes_list = list(pacientes)  # important: convert the QuerySet to a list object
+    print ("vera aqui", escalas)
 
 
-    return JsonResponse(pacientes_list, safe=False)
+    escalas_list = list(escalas)  # important: convert the QuerySet to a list object
+
+
+    return JsonResponse(escalas_list[0], safe=False)
 
 

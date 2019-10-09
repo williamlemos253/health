@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, declaracaodesaude, create_profile, hashsenhas, pacientes,consultadeclaracaodesaude, jsonPacientes
+from .views import home, declaracaodesaude, create_profile, hashsenhas, pacientes,consultadeclaracaodesaude, jsonPacientes, jsonEscalamedica
 
 urlpatterns = [
     path('', home),
@@ -9,4 +9,5 @@ urlpatterns = [
     path('pacientes', pacientes),
     path('consultadeclaracaodesaude/<int:id>', consultadeclaracaodesaude),
     path('jsonpacientes', jsonPacientes),
+    path('jsonescalamedica/<int:id>', jsonEscalamedica),
 ]

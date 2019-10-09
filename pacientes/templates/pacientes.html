@@ -32,7 +32,7 @@
       <th data-field="data_inclusao" data-sortable="true" data-formatter="dateFormat">Adesão</th>
       <th data-field="cpf">CPF</th>
       <th data-field="user__id" data-formatter="operateFormatter">Saúde</th>
-      <th data-field="user__id" data-formatter="operateFormatter2">Medicina</th>
+      <th data-field="user__id" data-formatter="operateFormatter2" id="medicina">Medicina</th>
       <th data-field="user__id" data-formatter="operateFormatter3">Psicosocial</th>
       <th data-field="user__id" data-formatter="operateFormatter4">Enfermagem</th>
       <th data-field="user__id" data-formatter="operateFormatter5">Resumo</th>
@@ -55,13 +55,7 @@
 
 {% block javascript %}
 {{ block.super }}
-    <script>
-    $(function() {
-        $('.container').LoadingOverlay("show");
-        $('#table').bootstrapTable();
-        $('.container').LoadingOverlay("hide");
-    })
-    </script>
+
 
 <script>
   function dateFormat(value, row, index) {
@@ -87,8 +81,10 @@
       '<a class="remove" href="/escalamedicaresultado/' + value +'" title="Resultado da Escala Médica">',
       '<i class="far fa-address-card fa-2x"></i>',
       '</a>',
-    ].join('')
-  }
+    ].join('');
+
+    }
+   
 
 
    function operateFormatter3(value, row, index) {
@@ -124,5 +120,13 @@
   }
 
 </script>
+
+
+<script>
+
+</script>
+
+
+
 
 {% endblock %}
