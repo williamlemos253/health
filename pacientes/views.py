@@ -108,6 +108,19 @@ def pacientes(request):
 
 @login_required
 def jsonPacientes(request):
+    pacientes = Profile.filter(user__is_staff=False).values('user__last_name','sexo','birth_date','data_inclusao','cpf', 'user__id')
+
+
+
+    pacientes_list = list(pacientes)  # important: convert the QuerySet to a list object
+
+
+    return JsonResponse(pacientes_list, safe=False)
+
+
+
+@login_required
+def jsonEscalamedica(request, id):
     pacientes = Profile.objects.select_related()
     pacientes = pacientes.filter(user__is_staff=False).values('user__last_name','sexo','birth_date','data_inclusao','cpf', 'user__id')
 
