@@ -23,41 +23,11 @@
 {% block content %}
 <div class="row mt-5 justify-content-md-center">
 
-        <div class="col-md-12">
-
-            <p>–Prezado(a) Beneficiário(a),</p>
-
-            <p>A <b>Agência Nacional de Saúde Suplementar (ANS),</b> instituição que regula as atividades das operadoras de planos privados de assistência à saúde, e tem como missão defender o interesse público vem, por meio desta, prestar informações para o preenchimento da DECLARAÇÃO DE SAÚDE.</p>
-            <br>
-            <h5>O QUE É A DECLARAÇÃO DE SAÚDE?</h5> 
-
-            <p>É o formulário que acompanha o Contrato do Plano de Saúde, onde o beneficiário ou seu representante legal deverá informar as doenças ou lesões preexistentes que saiba ser portador ou sofredor no momento da contratação do plano. Para o seu preenchimento, o beneficiário tem o direito de ser orientado, gratuitamente, por um médico credenciado/referenciado pela operadora. Se optar por um profissional de sua livre escolha, assumirá o custo desta opção.</p>
-
-            <p>Portanto, se o beneficiário (você) toma medicamentos regularmente, consulta médicos por problema de saúde do qual conhece o diagnóstico, fez qualquer exame que identificou alguma doença ou lesão, esteve internado ou submeteu-se a alguma cirurgia, DEVE DECLARAR ESTA DOENÇA OU LESÃO.</p>
-
-            <h5>AO DECLARAR AS DOENÇAS E/OU LESÕES QUE O BENEFICIÁRIO SAIBA SER PORTADOR NO MOMENTO DA CONTRATAÇÃO:</h5>
-
-            <ul>
-                <li>A operadora NÃO poderá impedi-lo de contratar o plano de saúde. Caso isto ocorra, encaminhe a denúncia à ANS.</li>
-                <li>A operadora deverá oferecer: cobertura total ou COBERTURA PARCIAL TEMPORÁRIA (CPT), podendo ainda oferecer o Agravo, que é um acréscimo no valor da mensalidade, pago ao plano privado de assistência à saúde, para que se possa utilizar toda a cobertura contratada, após os prazos de carências contratuais. </li>
-                <li> No caso de CPT, haverá restrição de cobertura para cirurgias, leitos de alta tecnologia (UTI, unidade coronariana ou neonatal) e procedimentos de alta complexidade - PAC (tomografia, ressonância, etc.*) EXCLUSIVAMENTE relacionados à doença ou lesão declarada, até 24 meses, contados desde a assinatura do contrato. Após o período máximo de 24 meses da assinatura contratual, a cobertura passará a ser integral de acordo com o plano contratado.</li> 
-                <li> NÃO haverá restrição de cobertura para consultas médicas, internações não cirúrgicas, exames e procedimentos que não sejam de alta complexidade, mesmo que relacionados à doença ou lesão preexistente declarada, desde que cumpridos os prazos de carências estabelecidas no contrato.</li> 
-                <li> Não caberá alegação posterior de omissão de informação na Declaração de Saúde por parte da operadora para esta doença ou lesão. </li>
-            </ul>
-
-            AO NÃO DECLARAR AS DOENÇAS E/OU LESÕES QUE O BENEFICIÁRIO SAIBA SER PORTADOR NO MOMENTO DA CONTRATAÇÃO: 
-            <ul>
-                <li>A operadora poderá suspeitar de omissão de informação e, neste caso, deverá comunicar imediatamente ao beneficiário, podendo oferecer CPT, ou solicitar abertura de processo administrativo junto à ANS, denunciando a omissão da informação.</li> 
-                <li>Comprovada a omissão de informação pelo beneficiário, a operadora poderá RESCINDIR o contrato por FRAUDE e responsabilizá-lo pelos procedimentos referentes à doença ou lesão não declarada.</li>
-                <li>Até o julgamento final do processo pela ANS, NÃO poderá ocorrer suspensão do atendimento nem rescisão do contrato. Caso isto ocorra, encaminhe a denúncia à ANS.</li>
-            </ul>
-            <h5>ATENÇÃO! </h5>
-            <p>Se a operadora oferecer redução ou isenção de carência, isto não significa que dará cobertura assistencial para as doenças ou lesões que o beneficiário saiba ter no momento da assinatura contratual. Cobertura Parcial Temporária - CPT - NÃO é carência! Portanto, o beneficiário não deve deixar de informar se possui alguma doença ou lesão ao preencher a Declaração de Saúde!</p>
-
-        </div>
+   
 
 
         <div class="col-md-12">
+                <h4 class="text-center">{{resultado.created_by.last_name}} - CPF: {{resultado.created_by.username}}</h4>
                 <table class="table table-hover table-bordered" style="font-size: 18px;">
                     <tbody>
                         <tr>
