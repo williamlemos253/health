@@ -5,6 +5,13 @@
 
 {% block content %}
 
+<style>
+  table{
+    font-size: 14px;
+  }
+
+</style>
+
 
 <table
   data-toggle="table"
@@ -21,21 +28,24 @@
   data-show-toggle="true"
   data-silent-sort="false"
   data-search-accent-neutralise="true"
-  data-url="/jsonpacientes"
+  data-click-to-select="true"
+  data-multiple-select-row="true"
+  data-url="/jsonescalamedica"
   >
   
   <thead>
     <tr>
-      <th data-field="user__last_name" data-sortable="true">Nome</th>
-      <th data-field="sexo" data-sortable="true">Sexo</th>
-      <th data-field="birth_date" data-sortable="true" data-formatter="dateFormat">Data Nasc.</th>
-      <th data-field="data_inclusao" data-sortable="true" data-formatter="dateFormat">Adesão</th>
-      <th data-field="cpf">CPF</th>
-      <th data-field="user__id" data-formatter="operateFormatter">Saúde</th>
-      <th data-field="user__id" data-formatter="operateFormatter2" id="medicina">Medicina</th>
-      <th data-field="user__id" data-formatter="operateFormatter3">Psicosocial</th>
-      <th data-field="user__id" data-formatter="operateFormatter4">Enfermagem</th>
-      <th data-field="user__id" data-formatter="operateFormatter5">Resumo</th>
+      <th data-checkbox="true"></th>
+      <th data-field="last_name" data-sortable="true">Nome</th>
+      <th data-field="profile__sexo" data-sortable="true" data-halign="center" data-align="center" title="Sexo">S</th>
+      <th data-field="profile__birth_date" data-sortable="true" data-formatter="dateFormat">Data Nasc.</th>
+      <th data-field="profile__data_inclusao" data-sortable="true" data-formatter="dateFormat">Adesão</th>
+      <th data-field="profile__cpf">CPF</th>
+      <th data-field="id" data-formatter="operateFormatter">Saúde</th>
+      <th data-field="escalamedica__pontuacao" data-sortable="true" data-formatter="operateFormatter2" >Medicina</th>
+      <th data-field="escalasocial__pontuacao" data-sortable="true" data-formatter="operateFormatter3">Psicosocial</th>
+      <th data-field="escalaenfermagem__somatotal" data-sortable="true" data-formatter="operateFormatter4">Enfermagem</th>
+      <th data-field="id" data-formatter="operateFormatter5" data-halign="center" data-align="center">Resumo</th>
     </tr>
   </thead>
 </table>
@@ -74,11 +84,14 @@
 
    function operateFormatter2(value, row, index) {
     return [
-      '<a class="remove" href="/escalamedica/' + value +'" title="Escala Médica">',
+      '<h4 class="text-center">',
+      + value,
+      '</h4>',
+      '<a class="remove" href="/escalamedica/' + row.id +'" title="Escala Médica">',
       '<i class="fas fa-user-md fa-2x"></i>',
       '</a>',
       ' ',
-      '<a class="remove" href="/escalamedicaresultado/' + value +'" title="Resultado da Escala Médica">',
+      '<a class="remove" href="/escalamedicaresultado/' + row.id +'" title="Resultado da Escala Médica">',
       '<i class="far fa-address-card fa-2x"></i>',
       '</a>',
     ].join('');
@@ -89,11 +102,14 @@
 
    function operateFormatter3(value, row, index) {
     return [
-      '<a class="remove" href="/escalasocial/' + value +'" title="Escala Psicosocial">',
+    '<h4 class="text-center">',
+      + value,
+      '</h4>',
+      '<a class="remove" href="/escalasocial/' + row.id +'" title="Escala Psicosocial">',
       '<i class="fas fa-user-friends fa-2x"></i>',
       '</a>',
       ' ',
-      '<a class="remove" href="/escalasocialresultado/' + value +'" title="Resultado da Escala Psicosocial">',
+      '<a class="remove" href="/escalasocialresultado/' + row.id +'" title="Resultado da Escala Psicosocial">',
       '<i class="far fa-address-card fa-2x"></i>',
       '</a>',
     ].join('')
@@ -101,11 +117,14 @@
 
   function operateFormatter4(value, row, index) {
     return [
-      '<a class="remove" href="/escalaenfermagem/' + value +'" title="Escala Psicosocial">',
+    '<h4 class="text-center">',
+      + value,
+      '</h4>',
+      '<a class="remove" href="/escalaenfermagem/' + row.id +'" title="Escala Psicosocial">',
       '<i class="fas fa-user-friends fa-2x"></i>',
       '</a>',
       ' ',
-      '<a class="remove" href="/escalaenfermagemresultado/' + value +'" title="Resultado da Escala Psicosocial">',
+      '<a class="remove" href="/escalaenfermagemresultado/' + row.id +'" title="Resultado da Escala Psicosocial">',
       '<i class="far fa-address-card fa-2x"></i>',
       '</a>',
     ].join('')
@@ -120,12 +139,6 @@
   }
 
 </script>
-
-
-<script>
-
-</script>
-
 
 
 

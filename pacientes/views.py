@@ -139,11 +139,11 @@ def jsonPacientes(request):
 @login_required
 def jsonEscalamedica(request):
 
-    pacientes = User.objects.select_related('Escalamedica')
+    pacientes = User.objects.select_related('Escalamedica').filter(is_staff=False)
 
 
     pacientes = pacientes.values('last_name','profile__sexo','profile__birth_date','profile__data_inclusao','profile__cpf', \
-     'id','escalamedica__pontuacao','escalasocial__pontuacao')
+     'id','escalamedica__pontuacao','escalasocial__pontuacao', 'escalaenfermagem__somatotal')
 
     
 
