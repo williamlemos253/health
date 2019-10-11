@@ -275,17 +275,17 @@ def escalasocialresultadosanteriores(request, id):
 @login_required
 def escalamedicafiltrada(request, id):
     resultado = Escalamedica.objects.get(id=id)
-    return render (request, 'escalamedica.html', {'resultados':resultado})
+    return render (request, 'escalamedicaresultado.html', {'resultados':resultado})
 
 @login_required
 def escalaenfermagemfiltrada(request, id):
     resultado = Escalaenfermagem.objects.get(id=id)
-    return render (request, 'escalaenfermagem.html', {'resultados':resultado})
+    return render (request, 'escalaenfermagemresultado.html', {'resultados':resultado})
 
 @login_required
 def escalasocialfiltrada(request, id):
     resultado = Escalasocial.objects.get(id=id)
-    return render (request, 'escalasocial.html', {'resultados':resultado})
+    return render (request, 'escalasocialresultado.html', {'resultado':resultado})
 
 
 @login_required
