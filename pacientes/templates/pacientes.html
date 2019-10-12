@@ -30,6 +30,9 @@
   data-search-accent-neutralise="true"
   data-click-to-select="true"
   data-multiple-select-row="true"
+  data-show-search-button="true"
+  data-show-search-clear-button="true"
+  data-search-on-enter-key="true"
   data-url="/jsonescalamedica"
   >
   
@@ -41,10 +44,10 @@
       <th data-field="profile__birth_date" data-sortable="true" data-formatter="dateFormat">Data Nasc.</th>
       <th data-field="profile__data_inclusao" data-sortable="true" data-formatter="dateFormat">Adesão</th>
       <th data-field="profile__cpf">CPF</th>
-      <th data-field="id" data-halign="center" data-align="center" data-formatter="operateFormatter">Saúde</th>
-      <th data-field="escalamedica__pontuacao" data-sortable="true" data-halign="center" data-align="center" data-formatter="operateFormatter2" >Medicina</th>
-      <th data-field="escalasocial__pontuacao" data-sortable="true" data-halign="center" data-align="center" data-formatter="operateFormatter3">Psicosocial</th>
-      <th data-field="escalaenfermagem__somatotal" data-sortable="true" data-halign="center" data-align="center" data-formatter="operateFormatter4">Enfermagem</th>
+      <th data-field="id" data-halign="center" data-searchable="false" data-align="center" data-formatter="operateFormatter">Saúde</th>
+      <th data-field="escalamedica__pontuacao" data-searchable="false" data-sortable="true" data-halign="center" data-align="center" data-formatter="operateFormatter2" >Medicina</th>
+      <th data-field="escalasocial__pontuacao" data-searchable="false" data-sortable="true" data-halign="center" data-align="center" data-formatter="operateFormatter3">Psicosocial</th>
+      <th data-field="escalaenfermagem__somatotal" data-searchable="false" data-sortable="true" data-halign="center" data-align="center" data-formatter="operateFormatter4">Enfermagem</th>
       <th data-field="id" data-formatter="operateFormatter5" data-halign="center" data-align="center">Resumo</th>
     </tr>
   </thead>

@@ -67,7 +67,10 @@ def escalamedica(request, id_paciente):
             escala.numcatclass = contadorcatclass
 
             #calcula o indice de gravidade do paciente
-            escala.indgravidade = escala.pontuacao / contadorcatclass
+            if int(escala.pontuacao) > 0:
+                escala.indgravidade = escala.pontuacao / contadorcatclass
+            else:
+                escala.indgravidade = 0
 
 
             if int(escala.coracao) == 0:
