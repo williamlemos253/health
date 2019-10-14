@@ -147,10 +147,6 @@ def jsonEscalamedica(request):
 
     
 
-    
-
-    print ("vera aqui", pacientes)
-
  # important: convert the QuerySet to a list object
     pacientes_list = list(pacientes)
 
