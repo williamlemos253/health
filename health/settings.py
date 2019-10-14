@@ -79,20 +79,13 @@ WSGI_APPLICATION = 'health.wsgi.application'
 
 DATABASES = {
     'default': {
-        # MySQL database engine class.
-        'ENGINE': 'django.db.backends.mysql',
-        # MySQL database host ip.
-        'HOST': '200.98.148.123',
-        # port number.
-        'PORT': '3306',
-        # database name.
-        'NAME': 'healthapp ',
-        # user name.
-        'USER': 'william',
-        # password
-        'PASSWORD': 'J2554fci$',
-        # connect options
-        'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",},
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DB_NAME', 'wiezpjee'),
+        'USER': os.environ.get('DB_USER', 'wiezpjee'),
+        'PASSWORD': os.environ.get('DB_PASS', 'DHNMQ2-GnvaIH61jNnepyKU7bOa1t83T'),
+        'HOST': 'tuffi.db.elephantsql.com',
+        'PORT': '5432'
+
     }
 }
 
