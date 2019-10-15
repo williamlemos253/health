@@ -358,6 +358,19 @@
                                <b> {{ resultado.ans26 }}CM </b>
                             </td>
                         </tr>
+                         <tr>
+                            <th scope="row">27)</th>
+                            <td>É portador (a) de alguma doença ou foi submetido (a) a alguma cirurgia ou tratamento que não foi mencionado acima?
+                            <b>{{resultado.outradoencadetalhes}}</b></td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="outradoenca" id="id_outradoenca" value=True autocomplete="off" checked>{% if resultado.outradoenca == True  %}Sim {% else %} Não {% endif %}
+                                </label>
+                  
+                                </div>
+                            </td>
+                        </tr>
                         
                         
                 

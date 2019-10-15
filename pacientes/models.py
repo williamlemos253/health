@@ -36,6 +36,10 @@ class Declaracaodesaude(models.Model):
     ans24 = models.BooleanField(default=True)
     ans25 = models.PositiveSmallIntegerField()
     ans26 = models.PositiveSmallIntegerField()
+    outradoenca = models.BooleanField(default=True)
+    outradoencadetalhes = models.CharField(max_length=300, verbose_name=("Descreva aqui"), blank=True)
+    pontuacao = models.PositiveSmallIntegerField()
+   
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

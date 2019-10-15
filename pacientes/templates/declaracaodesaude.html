@@ -447,6 +447,22 @@
                                 </div>
                             </td>
                         </tr>
+                        <tr>
+                            <th scope="row">27)</th>
+                            <td>É portador (a) de alguma doença ou foi submetido (a) a alguma cirurgia ou tratamento que não foi mencionado acima? Especificar
+                                {% bootstrap_field form.outradoencadetalhes show_label=False %}
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary btn-sm active">
+                                    <input type="radio" name="outradoenca" id="id_outradoenca" value=True autocomplete="off" checked>Sim
+                                </label>
+                                <label class="btn btn-outline-secondary btn-sm">
+                                    <input type="radio" name="outradoenca" id="id_outradoenca" value=False autocomplete="off">Não
+                                </label>
+                                </div>
+                            </td>
+                        </tr>
                         
                         
                 

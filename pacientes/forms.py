@@ -28,7 +28,7 @@ class DeclaracaodesaudeForm(ModelForm):
     class Meta:
         model = Declaracaodesaude
         fields = '__all__'
-        exclude = ['created_by', 'criado_em']
+        exclude = ['created_by', 'criado_em', 'pontuacao']
 
 
 class UserForm(ModelForm):

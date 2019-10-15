@@ -44,8 +44,90 @@ def declaracaodesaude(request):
             print (request.POST)
             print ("passou por aqui")
             if form.is_valid():
-                print('formulario valido')
                 declaracao = form.save(commit=False)
+
+                pontuacao = 0
+
+                if declaracao.ans01 == True:
+                    pontuacao = pontuacao + 2
+                
+                if declaracao.ans02 == True:
+                    pontuacao = pontuacao + 2
+
+                if declaracao.ans03 == True:
+                    pontuacao = pontuacao + 2
+
+                if declaracao.ans04 == True:
+                    pontuacao = pontuacao + 1
+
+                if declaracao.ans05 == True:
+                    pontuacao = pontuacao + 1
+
+                if declaracao.ans06 == True:
+                    pontuacao = pontuacao + 1
+
+                if declaracao.ans07 == True:
+                    pontuacao = pontuacao + 1
+
+                if declaracao.ans08 == True:
+                    pontuacao = pontuacao + 1
+
+                if declaracao.ans09 == True:
+                    pontuacao = pontuacao + 1
+
+                if declaracao.ans10 == True:
+                    pontuacao = pontuacao + 1
+
+                if declaracao.ans11 == True:
+                    pontuacao = pontuacao + 1
+
+                if declaracao.ans12 == True:
+                    pontuacao = pontuacao + 2
+
+                if declaracao.ans13 == True:
+                    pontuacao = pontuacao + 4
+
+                if declaracao.ans14 == True:
+                    pontuacao = pontuacao + 4
+                
+                if declaracao.ans15 == True:
+                    pontuacao = pontuacao + 1
+
+                if declaracao.ans16 == True:
+                    pontuacao = pontuacao + 1
+
+                if declaracao.ans17 == True:
+                    pontuacao = pontuacao + 1
+
+                if declaracao.ans18 == True:
+                    pontuacao = pontuacao + 2
+                
+                if declaracao.ans19 == True:
+                    pontuacao = pontuacao + 3
+                
+                if declaracao.ans20 == True:
+                    pontuacao = pontuacao + 4
+
+                if declaracao.ans21 == True:
+                    pontuacao = pontuacao + 4
+                
+                if declaracao.ans22 == True:
+                    pontuacao = pontuacao + 4
+
+                if declaracao.ans23 == True:
+                    pontuacao = pontuacao + 2
+
+                if declaracao.ans24 == True:
+                    pontuacao = pontuacao + 3
+
+                if declaracao.outradoenca == True:
+                    pontuacao = pontuacao + 1
+
+                
+
+                declaracao.pontuacao = pontuacao
+
+
                 declaracao.created_by = request.user
                 declaracao.save()
                 return redirect('/declaracaodesaude')
@@ -143,7 +225,7 @@ def jsonEscalamedica(request):
 
 
     pacientes = pacientes.values('last_name','profile__sexo','profile__birth_date','profile__data_inclusao','profile__cpf', \
-     'id','escalamedica__pontuacao','escalasocial__pontuacao', 'escalaenfermagem__somatotal').iterator()
+     'id','declaracaodesaude__pontuacao','escalamedica__pontuacao','escalasocial__pontuacao', 'escalaenfermagem__somatotal').iterator()
 
     
 
