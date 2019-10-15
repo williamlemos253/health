@@ -139,7 +139,7 @@ def jsonPacientes(request):
 @login_required
 def jsonEscalamedica(request):
 
-    pacientes = User.objects.select_related('Profile').filter(is_staff=False).distinct('profile__cpf')
+    pacientes = User.objects.prefetch_related('Profile__user').values_list().filter(is_staff=False).distinct('id')
 
 
     pacientes = pacientes.values('last_name','profile__sexo','profile__birth_date','profile__data_inclusao','profile__cpf', \
