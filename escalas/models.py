@@ -74,3 +74,18 @@ class Escalaenfermagem(models.Model):
     soma3 = models.PositiveSmallIntegerField()
     soma4 = models.PositiveSmallIntegerField()
     somatotal = models.PositiveSmallIntegerField()
+
+
+class Escalafisioterapia(models.Model):
+    paciente = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    medico =  models.CharField(max_length=150, verbose_name=("Fisioterapeuta"), blank=False)
+    medico_id = models.IntegerField(verbose_name=("Médico ID"), blank=False)
+    datareg = models.DateTimeField(auto_now_add=True)
+    banho = models.BooleanField(verbose_name=("Banho"))
+    vestir = models.BooleanField(verbose_name=("Vertir-se"))
+    higiene = models.BooleanField(verbose_name=("Higiene"))
+    transferencia = models.BooleanField(verbose_name=("Transferência"))
+    continencia = models.BooleanField(verbose_name=("Continência"))
+    alimentacao = models.BooleanField(verbose_name=("Alimentação"))
+    niveldor = models.PositiveSmallIntegerField(verbose_name=("Nível de dor"), default=1)
+    pontuacao = models.PositiveSmallIntegerField()

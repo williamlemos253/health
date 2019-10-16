@@ -197,6 +197,9 @@ def update_profile(request, id):
         profile_form = ProfileForm(request.POST, instance=profile)
         
         if user_form.is_valid() and profile_form.is_valid():
+            password = user_form.cleaned_data["password2"]
+            if password:
+                usuario.set_password(password)
             usuario.save()
             profile.save()
             messages.success(request, 'Perfil atualizado com sucesso!')

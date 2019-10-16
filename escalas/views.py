@@ -399,7 +399,7 @@ def resumo(request, id):
 
 @login_required
 def escalaenfermagem(request, id):
-    nomepaciente = Profile.objects.get(id=id)
+    nomepaciente = Profile.objects.get(user=id)
 
 
 

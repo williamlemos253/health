@@ -43,20 +43,11 @@ class CustomUserCreationForm(UserCreationForm):
 class UserUpdateForm(UserCreationForm):
     password1 = forms.CharField(label=("Senha"), required=False,
                             widget=forms.PasswordInput)
-    password2 = forms.CharField(label=("Confirmação de senha"),
+    password2 = forms.CharField(label=("Confirmação de"),
                             widget=forms.PasswordInput, required=False)
     class Meta:
         model = User
         fields = ('last_name', 'username', 'email')
-
-    def save(self, commit=True):
-        user = super(UserUpdateForm, self).save(commit=False)
-        password = self.cleaned_data["password2"]
-        if password:
-            user.set_password(password)
-        if commit:
-            user.save()
-        return user
 
 
 

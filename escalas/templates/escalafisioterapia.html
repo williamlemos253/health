@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{# cadastra os dados dos pacientes da fisioterpia na table Afisioterapeutas de acorda com a tabela de Katz #}
+
+{% block content %}
+
+{#https://vsn4ik.github.io/bootstrap-checkbox/ em caso de dúvidas sobre os botoes switch #}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-checkbox/1.5.0/js/bootstrap-checkbox.min.js" integrity="sha256-T6FbsboB5n0T7zQoZ9erXCofcfFTScKxfn8bI3P94+8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-checkbox/1.5.0/js/i18n/pt.min.js" integrity="sha256-ciXTXZ++lSMvXY3HA62vRnPQp7DMm1Ptc9tJu/v3UBY=" crossorigin="anonymous"></script>
+
+
+<style>
+
+    label{
+        font-size: 20px;
+        margin-left: 5px;
+    }
+
+</style>
+
+<br>
+<div class="row">
+    <div class="col-12">
+         <h4>Paciente: {{ paciente }}</h4>
+    </div>  
+             
+
+</div>
+
+
+            <form method="POST" class="form-group" >
+               {% csrf_token %}
+    
+                      <br>
+                  <div class="row">
+                
+                        <div class="col-12 col-md-6">
+                            <div class="form-inline">
+                             
+                                    {% bootstrap_field form.acamado %}
+                       
+                          
+                                <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
+                            </div>
+                            <div class="form-inline">
+                                {% bootstrap_field form.deficienciafisica %}
+                                <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
+                            </div>
+                            <div class="form-inline">
+
+                                    {% bootstrap_field form.deficienciamental %}
+                               
+                                 <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
+                            </div>
+                            <div class="form-inline">
+                                {% bootstrap_field form.saneamento %}
+
+                                 <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
+                            </div>
+                            <div class="form-inline">
+                                {% bootstrap_field form.desnutricao %}
+                                <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
+                            </div>
+                            <div class="form-inline">
+                            {% bootstrap_field form.drogadicao %}
+                            <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
+                        </div>
+                        </div>
+                    <div class="col-12 col-md-6">
+                         <div class="form-inline">
+                            {% bootstrap_field form.desempregado %}
+                            <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
+                        </div>
+                        <div class="form-inline">
+                            {% bootstrap_field form.analfabetismo %}
+                            <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
+                        </div>
+                        <div class="form-inline">
+                            {% bootstrap_field form.menor %}
+                            <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
+                        </div>
+                        <div class="form-inline">
+                            {% bootstrap_field form.maior %}
+                            <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
+                        </div>
+                        <div class="form-inline">
+                            {% bootstrap_field form.hipertensao %}
+                            <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
+                        </div>
+                   
+                    <div>
+                                            
+                        <div class="form-inline">                
+                            <p> {%  bootstrap_field form.moradores %} &nbsp; <span style="font-size: 20px; ">Número de moradores por cômodo</span> </p>
+                            
+                            <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
+                        </div>
+                                          
+                    </div>
+                               
+                   
+                   
+                   
+                    </div>
+                    <div class="col-12 text-center">
+                            {% buttons submit='Salvar' %}{% endbuttons %}
+                    </div>
+          
+            </form>
+   
+
+
+{% endblock %}
+
+
+{%  block javascript %}
+    <script>
+        $(':checkbox').checkboxpicker({
+            onCls: 'btn-outline-secondary',
+            offCls: 'btn-danger-outline',
+
+        });
+    </script>
+
+{% endblock %}
