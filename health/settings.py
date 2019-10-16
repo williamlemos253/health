@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'health.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME', 'wiezpjee'),
-        'USER': os.environ.get('DB_USER', 'wiezpjee'),
-        'PASSWORD': os.environ.get('DB_PASS', 'DHNMQ2-GnvaIH61jNnepyKU7bOa1t83T'),
-        'HOST': 'tuffi.db.elephantsql.com',
+        'NAME': os.environ.get('DB_NAME', 'healthapp'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASS', 'J2554fci$'),
+        'HOST': '200.98.148.123',
         'PORT': '5432'
 
     }
@@ -107,6 +107,12 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+
+AUTHENTICATION_BACKENDS = [
+'django.contrib.auth.backends.ModelBackend',
+'escalas.funcoes.EmailAuthentication',
 ]
 
 

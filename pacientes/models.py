@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 class Declaracaodesaude(models.Model):
     created_by = models.OneToOneField(User, verbose_name=("Usuário"), on_delete=models.CASCADE)
@@ -43,8 +44,12 @@ class Declaracaodesaude(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    cpf = models.CharField(unique=True, max_length=15, blank=True)
+    cpf = models.CharField(max_length=15)
     empresa = models.CharField(max_length=150, blank=True)
-    birth_date = models.DateField(null=True, blank=True, verbose_name=("Data de Nascimento") )
-    sexo = models.CharField(max_length=15, blank=True)
-    data_inclusao = models.DateField(null=True, blank=True, verbose_name=("Data de inclusão no plano"))
+    birth_date = models.DateField(verbose_name=("Data de Nascimento") )
+    sexo = models.CharField(max_length=15)
+    data_inclusao = models.DateField(verbose_name=("Data de inclusão no plano"))
+
+    class Meta:
+        unique_together = ('cpf','birth_date','sexo')
+        

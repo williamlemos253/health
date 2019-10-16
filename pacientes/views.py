@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import DeclaracaodesaudeForm, UserForm, ProfileForm
+from .forms import DeclaracaodesaudeForm, ProfileForm, CustomUserCreationForm, UserUpdateForm
 from .models import Declaracaodesaude, Profile
 from escalas.models import Escalamedica
 from django.contrib import messages
@@ -9,7 +9,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.contrib.auth.decorators import user_passes_test
-
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 
@@ -150,28 +150,23 @@ def consultadeclaracaodesaude(request, id):
 
 
 @login_required
-@group_required('admins', 'colaborador')
+@staff_member_required
 def create_profile(request):
     if request.method == 'POST':
-        user_form = UserForm(request.POST)
+        user_form = CustomUserCreationForm(request.POST)
         profile_form = ProfileForm(request.POST)
         if user_form.is_valid() and profile_form.is_valid():
             usuario = user_form.save(commit=False)
             perfil = profile_form.save(commit=False)
-            usuario.username = perfil.cpf
-            if not user_form.cleaned_data['password'] == user_form.cleaned_data['password1']:
-                messages.error(request, 'Os campos de senha não são iguais.')
-                return redirect('/criarusuario')
-            usuario.password = make_password(user_form.cleaned_data['password'])
             usuario.save()
             perfil.user = usuario
             perfil.save()
             messages.success(request, 'Usuário criado com sucesso!')
             return redirect('/')
-        else:
-            messages.error(request, 'Por favor corrija os erros.')
+      
+            
     else:
-        user_form = UserForm()
+        user_form = CustomUserCreationForm()
         profile_form = ProfileForm()
     return render(request, 'profile.html', {
         'user_form': user_form,
@@ -180,10 +175,48 @@ def create_profile(request):
 
 
 
+@login_required
+@staff_member_required
+def update_profile(request, id):
+    usuario = User.objects.get(id=id)
+    try:
+        profile = Profile.objects.get(user=id)
+        profile_form = ProfileForm(instance=profile)
+    except:
+        user_form = CustomUserCreationForm(request.POST, instance=usuario)
+        profile_form = ProfileForm()
+        profile = None
+
+    if request.method == 'POST':
+        if profile is None:
+            perfil = profile_form.save(commit=False)
+            perfil.user = usuario
+            perfil.save()
+            profile = Profile.objects.get(user=id)
+        user_form = UserUpdateForm(request.POST, instance=usuario) 
+        profile_form = ProfileForm(request.POST, instance=profile)
+        
+        if user_form.is_valid() and profile_form.is_valid():
+            usuario.save()
+            profile.save()
+            messages.success(request, 'Perfil atualizado com sucesso!')
+            return redirect('/pacientes')
+        else:
+            messages.error(request, 'Por favor corrija os erros.')
+    else:
+        user_form = UserUpdateForm(instance=usuario)
+    return render(request, 'profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })
+
+
+
+
 
 # criptografa as senhas importados direto no banco de dados 
 @login_required
-@group_required('admins', 'colaborador')
+@staff_member_required
 def hashsenhas(request):
     for user in User.objects.all():
         user.set_password(user.password)
@@ -195,7 +228,7 @@ def hashsenhas(request):
 
 
 @login_required
-@group_required('admins', 'colaborador')
+@staff_member_required
 def pacientes(request):
     pacientes = Profile.objects.all()
     pacientes = pacientes.filter(user__is_staff=False)
@@ -205,7 +238,7 @@ def pacientes(request):
 
 
 @login_required
-@group_required('admins', 'colaborador')
+@staff_member_required
 def jsonPacientes(request):
     pacientes = Profile.objects.filter(user__is_staff=False).values('user__last_name','sexo','birth_date','data_inclusao','cpf', 'user__id')
 
@@ -219,6 +252,7 @@ def jsonPacientes(request):
 
 
 @login_required
+@staff_member_required
 def jsonEscalamedica(request):
 
     pacientes = User.objects.filter(is_staff=False).prefetch_related('id').distinct('id')
@@ -233,8 +267,4 @@ def jsonEscalamedica(request):
     pacientes_list = list(pacientes)
 
 
-
-
     return JsonResponse(pacientes_list, safe=False)
-
-

@@ -405,7 +405,6 @@ def escalaenfermagem(request, id):
 
     if request.method =='POST':
         form = EscalaEnfermagemForm(request.POST)
-        print ('chegou aqui', form.errors)
         if form.is_valid():
             escala = form.save(commit=False)
             soma1 = 0

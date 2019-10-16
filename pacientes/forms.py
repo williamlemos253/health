@@ -1,7 +1,9 @@
 from django.forms import ModelForm, CharField, CheckboxInput
 from .models import Declaracaodesaude, Profile
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
+from django.core.exceptions import NON_FIELD_ERRORS
 
 
 class DeclaracaodesaudeForm(ModelForm):
@@ -31,13 +33,33 @@ class DeclaracaodesaudeForm(ModelForm):
         exclude = ['created_by', 'criado_em', 'pontuacao']
 
 
-class UserForm(ModelForm):
-    password1=forms.CharField(widget=forms.PasswordInput(), label='Senha', )
+class CustomUserCreationForm(UserCreationForm):
     last_name = forms.CharField(label='Nome Completo', required=True)
-    
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = UserCreationForm.Meta.fields + ('last_name','email')
+
+
+class UserUpdateForm(UserCreationForm):
+    password1 = forms.CharField(label=("Senha"), required=False,
+                            widget=forms.PasswordInput)
+    password2 = forms.CharField(label=("Confirmação de senha"),
+                            widget=forms.PasswordInput, required=False)
     class Meta:
         model = User
-        fields = ('last_name', 'email', 'password')
+        fields = ('last_name', 'username', 'email')
+
+    def save(self, commit=True):
+        user = super(UserUpdateForm, self).save(commit=False)
+        password = self.cleaned_data["password2"]
+        if password:
+            user.set_password(password)
+        if commit:
+            user.save()
+        return user
+
+
+
 
 class ProfileForm(ModelForm):
     sexo = forms.ChoiceField(
@@ -49,3 +71,8 @@ class ProfileForm(ModelForm):
     class Meta:
         model = Profile
         fields = ('cpf', 'birth_date', 'empresa', 'sexo', 'data_inclusao')
+        error_messages = {
+                NON_FIELD_ERRORS: {
+                    'unique_together':"Esse usuário já está cadastrado, por favor verifique",
+                },
+            }

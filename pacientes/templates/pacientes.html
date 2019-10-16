@@ -35,8 +35,8 @@
   
   <thead>
     <tr>
-      <th data-checkbox="true" data-searchable="false"></th>
-      <th data-field="last_name" data-sortable="true">Nome</th>
+      <th data-checkbox="true" data-halign="center" data-align="center" data-searchable="false" data-formatter="operateFormatter6" ></th>
+      <th data-field="last_name" data-sortable="true" >Nome</th>
       <th data-field="profile__sexo" data-searchable="false" data-sortable="true" data-halign="center" data-align="center" title="Sexo">S</th>
       <th data-field="profile__birth_date" data-searchable="false" data-sortable="true" data-formatter="dateFormat">Data Nasc.</th>
       <th data-field="profile__data_inclusao" data-searchable="false"  data-sortable="true" data-formatter="dateFormat">Adesão</th>
@@ -123,11 +123,11 @@
     '<h4 class="text-center">',
       + value,
       '</h4>',
-      '<a class="remove" href="/escalaenfermagem/' + row.id +'" title="Escala Psicosocial">',
-      '<i class="fas fa-user-friends fa-2x"></i>',
+      '<a class="remove" href="/escalaenfermagem/' + row.id +'" title="Escala Enfermagem">',
+      '<i class="fas fa-user-nurse fa-2x"></i>',
       '</a>',
       ' ',
-      '<a class="remove" href="/escalaenfermagemresultado/' + row.id +'" title="Resultado da Escala Psicosocial">',
+      '<a class="remove" href="/escalaenfermagemresultado/' + row.id +'" title="Resultado da Escala Enfermagem">',
       '<i class="far fa-address-card fa-2x"></i>',
       '</a>',
     ].join('')
@@ -137,6 +137,14 @@
     return [
       '<a class="remove" href="/resumo/' + value +'" title="Resumo das Escalas">',
       '<i class="fas fa-tachometer-alt fa-2x"></i>',
+      '</a>',
+    ].join('')
+  }
+
+  function operateFormatter6(value, row, index) {
+    return [
+      '<a href="/atualizarperfil/' + row.id +'" title="Editar Perfil de usuário">',
+      '<i class="fas fa-edit fa-2x"></i>',
       '</a>',
     ].join('')
   }

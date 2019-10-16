@@ -17,5 +17,31 @@ def calculate_age(born):
 #valida os models
 def valida0entre4(value):
     if value < 0 or value > 4:
-        raise ValidationError(_('Invalid value: %s') % value)
+        raise forms.ValidationError(_('Valor inválido: %s') % value)
+
+
+
+
+#permite o login por email
+class EmailAuthentication(object):
+    def authenticate(self, request, username=None, password=None):
+        try:
+            user = User.objects.get(email=username)
+            if user.check_password(password):
+                return user
+            return None
+        except:
+            return None
+    def get_user(self, user_id):
+        try:
+            return User.objects.get(id=user_id)
+        except:
+            return None
+
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError(' Já existe um usuário com esse email')    
+        return email
 
