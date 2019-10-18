@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import escalamedica, escalamedicaresultado, escalamedicaresultadosanteriores, escalamedicafiltrada, escalasocial, escalasocialresultado, \
- escalaenfermagem, resumo, escalaenfermagemresultado, escalaenfermagemresultadosanteriores, escalaenfermagemfiltrada, escalasocialresultadosanteriores, escalasocialfiltrada
+ escalaenfermagem, resumo, escalaenfermagemresultado, escalaenfermagemresultadosanteriores, escalaenfermagemfiltrada, escalasocialresultadosanteriores, escalasocialfiltrada, \
+     escalafisioterapia, escalafisioterapiaresultado, escalafisioterapiaresultadosanteriores, escalafisioterapiafiltrada
 
 urlpatterns = [
     path('escalamedica/<int:id_paciente>', escalamedica),
@@ -15,6 +16,10 @@ urlpatterns = [
     path('escalaenfermagemresultado/<int:id>', escalaenfermagemresultado),
     path('escalaenfermagemresultadosanteriores/<int:id>', escalaenfermagemresultadosanteriores),
     path('escalaenfermagemfiltrada/<int:id>', escalaenfermagemfiltrada),
+    path('escalafisioterapia/<int:id>', escalafisioterapia),
+    path('escalafisioterapiaresultado/<int:id>', escalafisioterapiaresultado),
+    path('escalafisioterapiaresultadosanteriores/<int:id>', escalafisioterapiaresultadosanteriores),
+    path('escalafisioterapiafiltrada/<int:id>', escalafisioterapiafiltrada),
     path('resumo/<int:id>', resumo),
 
 

@@ -262,12 +262,13 @@ def jsonEscalamedica(request):
 
 
     pacientes = pacientes.values('last_name','profile__sexo','profile__birth_date','profile__data_inclusao','profile__cpf', \
-     'id','declaracaodesaude__pontuacao','escalamedica__pontuacao','escalasocial__pontuacao', 'escalaenfermagem__somatotal').iterator()
+     'id','declaracaodesaude__pontuacao','escalamedica__pontuacao','escalasocial__pontuacao', 'escalaenfermagem__somatotal', 'escalafisioterapia__pontuacao').iterator()
 
-    
 
  # important: convert the QuerySet to a list object
     pacientes_list = list(pacientes)
 
 
-    return JsonResponse(pacientes_list, safe=False)
+
+
+    return JsonResponse( pacientes_list, safe=False)

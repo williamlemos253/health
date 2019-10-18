@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+
+{% cycle '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12' '13' '14' as counter %}
+{% cycle '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12' '13' '14' as counter2 %}
+{% load bootstrap4 %}
+
+
+
+{% block content %} 
+
+<style>
+span.step {
+  background: #33CCCC;
+  border-radius: 1.0em;
+  -moz-border-radius: 1.0em;
+  -webkit-border-radius: 1.0em;
+  color: #ffffff;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 2.3em;
+  margin-right: 5px;
+  text-align: center;
+  width: 2.3em; 
+}
+
+</style>
+
+
+
+{#  CDN do chartJS #}
+<div class="row">
+  <div class="col-12 col-md-6">
+    <h4 class="text-center">Nº de problemas por grau de severidade</h4>
+      <canvas id="CirsgChart" width="200" height="200"></canvas>
+      <script>
+      // And for a doughnut chart
+      var ctx = document.getElementById("CirsgChart").getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ["Sem Problemas", "Problemas Leves", "Problemas Moderados", "Problemas Graves", "Problemas Extremamente Graves"],
+          datasets: [{
+            backgroundColor: [
+              "#CCCCCC",
+              "#99CCCC",
+              "#33CCCC",
+              "#CC6699",
+              "#CC3366"
+            ],
+            data: [ {{resultados.numcatsev0}},  {{resultados.numcatsev1}}, {{resultados.numcatsev2}}, {{resultados.numcatsev3}}, {{resultados.numcatsev4}}]
+          }]
+        }
+      });
+      </script>
+  </div>
+    <div class="col-12 col-md-6">
+        <h4>Resp: {{ resultados.medico }}</h4>
+        <h4>Paciente: {{resultados.paciente.last_name  }}</h4>
+        <h4>Idade:&nbsp;{{ idade }} anos</h4>
+        <h4>Data/Hora: {{ resultados.datareg|date:"d/m/Y h:m" }} </h4>
+        &nbsp;
+        <h4 class="text-center">Resultado da avaliação</h4>
+        <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" /> 
+        <h5>Número de categorias classificadas:&nbsp;<span class="step">{{ resultados.numcatclass }}</span></h5>
+        <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" /> 
+        <h5>Pontuação Total:&nbsp;<span class="step">{{ resultados.pontuacao }}</span></h5>
+        <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" /> 
+        <h5>Índice de gravidade:&nbsp;<span class="step">{{ resultados.indgravidade|floatformat }}</span></h5>
+        <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" /> 
+        <h5>Número de categorias com severidade de nível 3:&nbsp;<span class="step">{{ resultados.numcatsev3 }}</span></h5>
+        <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" /> 
+        <h5>Número de categorias com severidade de nível 4:&nbsp;<span class="step">{{ resultados.numcatsev4 }}</span></h5>
+        <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" /> 
+    </div>
+  
+  
+  
+  
+  <div class="col-12 col-md-6">
+    <h4 class="text-center">Categorias de severidade 3</h4>
+     
+     <table class="table table-striped table-responsive-md">
+       <thead>
+        <tr>
+          <th>#</th>
+          <th>Área afetada</th>
+        </tr>
+      </thead>
+        <tbody>
+            
+          {% if resultados.coracao == 3 %}  
+             <tr><th scope="row">{% cycle counter %}</th>
+            <td>Coração</td></tr>
+          {%  endif  %}
+      
+        
+          {% if resultados.vascular == 3 %}
+            <tr><th scope="row">{% cycle counter %}</th>
+            <td>Cardiovascular</td></tr>
+          {%  endif  %}
+        
+          {% if resultados.hematopoietico == 3 %} 
+            <tr><th scope="row">{% cycle counter %}</th>
+            <td>Hematopoiético</td></tr>
+          {%  endif  %}
+        
+          {% if resultados.respiratorio == 3 %}
+            <tr><th scope="row">{% cycle counter %}</th>
+            <td>Sistema Respiratório</td></tr>
+          {%  endif  %}
+          
+          {% if resultados.otorrino == 3 %}
+            <tr><th scope="row">{% cycle counter %}</th>
+            <td>Olhos, ouvidos, nariz, garganta e laringe</td></tr>
+          {%  endif  %}
+          
+          {% if resultados.gastrointestinalsup == 3 %}
+            <tr><th scope="row">{% cycle counter %}</th>
+             <td>Trato gastrointestinal superior</td></tr>
+          {%  endif  %}
+          
+          {% if resultados.gastrointestinalinf == 3 %}
+            <tr><th scope="row">{% cycle counter %}</th>
+            <td>Trato gastrointestinal inferior</td></tr>
+          {%  endif  %}
+          
+          {% if resultados.figado == 3 %}
+            <tr><th scope="row">{% cycle counter %}</th>
+            <td>Fígado</td></tr>
+          {%  endif  %}
+          
+          {% if resultados.renal == 3 %}
+            <tr><th scope="row">{% cycle counter %}</th>
+            <td>Rins</td></tr>
+          {%  endif  %}
+          
+          {% if resultados.genitourinario == 3 %}
+            <tr><th scope="row">{% cycle counter %}</th>
+            <td>Genitourinário</td></tr>
+          {%  endif  %}
+          
+          {% if resultados.musculosqueletico == 3 %} 
+            <tr><th scope="row">{% cycle counter %}</th>
+            <td>Musculosquelético</td></tr>
+          {%  endif  %}
+          
+          {% if resultados.neurologico == 3 %}
+            <tr><th scope="row">{% cycle counter %}</th>
+            <td>Neurológico</td></tr>
+          {%  endif  %}
+            
+          {% if resultados.endocrino == 3 %}
+            <tr><th scope="row">{% cycle counter %}</th>
+            <td>Endócrino</td></tr>
+          {%  endif  %}
+      
+          {% if resultados.psiquiatrica == 3 %}
+            <tr><th scope="row">{% cycle counter %}</th>
+            <td>Psiquiátrica</td></tr>
+          {%  endif  %}
+        </tbody>
+    </table>
+   </div>  
+   
+   
+   
+    <div class="col-12 col-md-6">
+    <h4 class="text-center">Categorias de severidade 4</h4>
+     
+     <table class="table table-striped table-responsive-md">
+       <thead>
+        <tr>
+          <th>#</th>
+          <th>Área afetada</th>
+        </tr>
+      </thead>
+        <tbody>
+    
+          {% if resultados.coracao == 4 %}
+            
+            <tr><th scope="row">{% cycle counter2 %}</th>
+            <td>Coração</td></tr>
+          {%  endif  %}
+      
+        
+          {% if resultados.vascular == 4 %}
+           
+            <tr><th scope="row">{% cycle counter2 %}</th>
+            <td>Cardiovascular</td></tr>
+          {%  endif  %}
+        
+          {% if resultados.hematopoietico == 4 %}
+             
+            <tr><th scope="row">{% cycle counter2 %}</th>
+            <td>Hematopoiético</td></tr>
+          {%  endif  %}
+        
+          {% if resultados.respiratorio == 4 %}
+            
+            <tr><th scope="row">{% cycle counter2 %}</th>
+            <td>Sistema Respiratório</td></tr>
+          {%  endif  %}
+          
+          {% if resultados.otorrino == 4 %}
+            
+            <tr><th scope="row">{% cycle counter2 %}</th>
+            <td>Olhos, ouvidos, nariz, garganta e laringe</td></tr>
+          {%  endif  %}
+          
+          {% if resultados.gastrointestinalsup == 4 %}
+             
+             <tr><th scope="row">{% cycle counter2 %}</th>
+             <td>Trato gastrointestinal superior</td></tr>
+          {%  endif  %}
+          
+          {% if resultados.gastrointestinalinf == 4 %}
+             
+            <tr><th scope="row">{% cycle counter2 %}</th>
+            <td>Trato gastrointestinal inferior</td></tr>
+          {%  endif  %}
+          
+          {% if resultados.figado == 4 %}
+            
+            <tr><th scope="row">{% cycle counter2 %}</th>
+            <td>Fígado</td></tr>
+          {%  endif  %}
+          
+          {% if resultados.renal == 4 %}
+             
+            <tr><th scope="row">{% cycle counter2 %}</th>
+            <td>Rins</td></tr>
+          {%  endif  %}
+          
+          {% if resultados.genitourinario == 4 %}
+             
+            <tr><th scope="row">{% cycle counter2 %}</th>
+            <td>Genitourinário</td></tr>
+          {%  endif  %}
+          
+          {% if resultados.musculosqueletico == 4 %}
+             
+            <tr><th scope="row">{% cycle counter2 %}</th>
+            <td>Musculosquelético</td></tr>
+          {%  endif  %}
+          
+          {% if resultados.neurologico == 4 %}
+            
+            <tr><th scope="row">{% cycle counter2 %}</th>
+            <td>Neurológico</td></tr>
+          {%  endif  %}
+            
+          {% if resultados.endocrino == 4 %}
+            
+            <tr><th scope="row">{% cycle counter2 %}</th>
+            <td>Endócrino</td></tr>
+          {%  endif  %}
+      
+          {% if resultados.psiquiatrica == 4 %}
+            
+            <tr><th scope="row">{% cycle counter2 %}</th>
+            <td>Psiquiátrica</td></tr>
+          {%  endif  %}
+        </tbody>
+    </table>
+  </div>
+<div class="col-12 text-center">
+  <a href="/escalamedicaresultadosanteriores/{{resultados.paciente.id}}" ><button type="button" class="btn btn-outline-secondary">Ver prontuários anteriores</button></a>
+</div>
+</div>
+&nbsp;
+{% endblock %}

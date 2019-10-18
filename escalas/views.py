@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import EscalaMedicaForm, EscalaSocialForm, EscalaEnfermagemForm
-from .models import Escalamedica, Escalasocial, Escalaenfermagem
+from .forms import EscalaMedicaForm, EscalaSocialForm, EscalaEnfermagemForm, EscalaFisioterapiaForm
+from .models import Escalamedica, Escalasocial, Escalaenfermagem, Escalafisioterapia
 from pacientes.models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -526,3 +526,77 @@ def escalaenfermagemresultado(request, id):
     usuario = Profile.objects.get(user=id)
     idade = calculate_age(usuario.birth_date)
     return render (request, 'escalaenfermagemresultado.html', {'resultados':resultado, 'idade':idade})
+
+
+
+
+
+@login_required
+def escalafisioterapia(request, id):
+
+    nomepaciente = Profile.objects.get(user=id)
+
+ 
+    total = 0
+
+    if request.method =='POST':
+        form = EscalaFisioterapiaForm(request.POST)
+        if form.is_valid():
+            escala =  form.save(commit=False)
+            escala.paciente = nomepaciente.user
+            escala.medico = request.user.last_name
+            escala.medico_id = request.user.id
+
+
+            if escala.banho == True:
+                total = total +1
+            if escala.vestir == True:   
+                total = total +1
+            if escala.higiene == True:
+                total = total +1
+            if escala.transferencia == True:
+                total = total +1
+            if escala.continencia == True:     
+                total = total +1
+            if escala.alimentacao == True:
+                total = total +1
+        
+          
+            total = total + int(escala.niveldor)
+            escala.pontuacao = total
+
+            escala.save()
+
+            messages.success(request, 'Dados da escala Fisioterápica cadastrados com sucesso')
+            return redirect("/escalafisioterapiaresultado/"+str(id))
+
+    else:
+        form = EscalaFisioterapiaForm()   
+
+            
+
+    return render (request, 'escalafisioterapia.html', {'paciente':nomepaciente.user.last_name, 'form':form})
+
+
+
+@login_required
+def escalafisioterapiaresultado(request, id):
+    resultado = Escalafisioterapia.objects.filter(paciente=id).last()
+    usuario = Profile.objects.get(id=id)
+    if resultado is None:
+        return render (request, 'embranco.html')
+
+    idade = calculate_age(usuario.birth_date)
+
+    return render (request, 'escalafisioterapiaresultado.html', {'resultado': resultado, 'idade':idade})
+
+
+@login_required
+def escalafisioterapiafiltrada(request, id):
+    resultado = Escalafisioterapia.objects.get(id=id)
+    return render (request, 'escalafisioterapiaresultado.html', {'resultado':resultado})
+
+@login_required
+def escalafisioterapiaresultadosanteriores(request, id):
+    resultado = Escalafisioterapia.objects.filter(paciente=id).order_by('datareg').reverse()
+    return render (request, 'escalafisioterapiaresultadosanteriores.html', {'resultados':resultado})

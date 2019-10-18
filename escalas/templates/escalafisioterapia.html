@@ -17,6 +17,10 @@
         margin-left: 5px;
     }
 
+    .form-group{
+        margin-bottom: 0px;
+    }
+
 </style>
 
 <br>
@@ -35,77 +39,62 @@
                       <br>
                   <div class="row">
                 
-                        <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-6">
                             <div class="form-inline">
                              
-                                    {% bootstrap_field form.acamado %}
+                                    {% bootstrap_field form.banho %}
                        
                           
                                 <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
                             </div>
-                            <div class="form-inline">
-                                {% bootstrap_field form.deficienciafisica %}
-                                <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
-                            </div>
+                            
                             <div class="form-inline">
 
-                                    {% bootstrap_field form.deficienciamental %}
+                                    {% bootstrap_field form.vestir %}
                                
                                  <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
                             </div>
                             <div class="form-inline">
-                                {% bootstrap_field form.saneamento %}
+                                {% bootstrap_field form.higiene %}
 
                                  <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
                             </div>
+                           
+                    </div>
+                    <div class="col-12 col-md-6">
                             <div class="form-inline">
-                                {% bootstrap_field form.desnutricao %}
+                                {% bootstrap_field form.transferencia %}
                                 <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
                             </div>
                             <div class="form-inline">
-                            {% bootstrap_field form.drogadicao %}
-                            <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
-                        </div>
-                        </div>
-                    <div class="col-12 col-md-6">
-                         <div class="form-inline">
-                            {% bootstrap_field form.desempregado %}
-                            <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
-                        </div>
-                        <div class="form-inline">
-                            {% bootstrap_field form.analfabetismo %}
-                            <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
-                        </div>
-                        <div class="form-inline">
-                            {% bootstrap_field form.menor %}
-                            <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
-                        </div>
-                        <div class="form-inline">
-                            {% bootstrap_field form.maior %}
-                            <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
-                        </div>
-                        <div class="form-inline">
-                            {% bootstrap_field form.hipertensao %}
-                            <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
-                        </div>
+                                {% bootstrap_field form.continencia %}
+                                <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
+                            </div>
+                            <div class="form-inline">
+                                {% bootstrap_field form.alimentacao %}
+                                <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
+                            </div>
+                       
                    
-                    <div>
-                                            
-                        <div class="form-inline">                
-                            <p> {%  bootstrap_field form.moradores %} &nbsp; <span style="font-size: 20px; ">Número de moradores por cômodo</span> </p>
-                            
-                            <hr style="width: 100%; color: #77cbcd; height: 1px; background-color:#77cbcd;" />
-                        </div>
-                                          
                     </div>
+
+                    <div class="col-12 text-center">
+                        {% bootstrap_field form.niveldor %}
+                        <b>Nível de dor</b>
+                    </div>
+                      
                                
                    
                    
                    
                     </div>
                     <div class="col-12 text-center">
+                        <p>
                             {% buttons submit='Salvar' %}{% endbuttons %}
+                        </p>
                     </div>
+
+                </div>
           
             </form>
    

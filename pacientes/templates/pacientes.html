@@ -10,52 +10,66 @@
     font-size: 14px;
   }
 
+
 </style>
+
+
+
+<div id="toolbar" class="btn-group" >
+  <button type="button" class="btn btn-secondary" aria-label="Print" title="Imprimir" onClick ="$('#table').tableExport({type:'pdf',
+                           jspdf: {format: 'bestfit',
+                                   margins: {left:20, top:10},
+                                   }
+                          });"><i class="fas fa-print"></i></button>
+</div>
+
+
 
 
 <table
   data-toggle="table"
   id="table"
-  data-pagination="true"
+  data-toolbar="#toolbar"
+  data-toolbar-align="right"
+  data-locale="pt-BR"
   data-search="true"
+  data-search-on-enter-key="true"
   data-advanced-search="true"
+  data-show-search-button="true"
+  data-show-search-clear-button="true"
   data-id-table="advancedTable"
   data-show-columns="true"
   data-show-jump-to="true"
   data-page-list="[10, 25, 50, 100, all]"
-  data-show-export="true"
   data-show-refresh="true"
   data-show-toggle="true"
   data-silent-sort="false"
   data-search-accent-neutralise="true"
-  data-click-to-select="true"
-  data-multiple-select-row="true"
+  data-reorderable-columns="true"
+  data-show-multi-sort="true"
+  data-show-export="true"
+  data-id-field="id"
+  data-pagination="true"
   data-url="/jsonescalamedica"
   >
   
   <thead>
     <tr>
-      <th data-checkbox="true" data-halign="center" data-align="center" data-searchable="false" data-formatter="operateFormatter6" ></th>
+      <th data-halign="center" data-align="center" data-searchable="false" data-formatter="operateFormatter6" ></th>
       <th data-field="last_name" data-sortable="true" >Nome</th>
       <th data-field="profile__sexo" data-searchable="false" data-sortable="true" data-halign="center" data-align="center" title="Sexo">S</th>
       <th data-field="profile__birth_date" data-searchable="false" data-sortable="true" data-formatter="dateFormat">Data Nasc.</th>
       <th data-field="profile__data_inclusao" data-searchable="false"  data-sortable="true" data-formatter="dateFormat">Adesão</th>
       <th data-field="profile__cpf">CPF</th>
-      <th data-field="declaracaodesaude__pontuacao" data-sortable="true" data-halign="center" data-searchable="false" data-align="center" data-formatter="operateFormatter">Saúde</th>
-      <th data-field="escalamedica__pontuacao" data-searchable="false" data-sortable="true" data-halign="center" data-align="center" data-formatter="operateFormatter2" >Medicina</th>
-      <th data-field="escalasocial__pontuacao" data-searchable="false" data-sortable="true" data-halign="center" data-align="center" data-formatter="operateFormatter3">Psicosocial</th>
-      <th data-field="escalaenfermagem__somatotal" data-searchable="false" data-sortable="true" data-halign="center" data-align="center" data-formatter="operateFormatter4">Enfermagem</th>
-      <th data-field="id" data-searchable="false" data-formatter="operateFormatter5" data-halign="center" data-align="center">Resumo</th>
+      <th data-field="declaracaodesaude__pontuacao" data-sortable="true" data-halign="center" data-searchable="false" data-align="center" data-formatter="operateFormatter">Termo</th>
+      <th data-field="escalamedica__pontuacao" data-searchable="false" data-sortable="true" data-halign="center" data-align="center" data-formatter="operateFormatter2" >Medic.</th>
+      <th data-field="escalasocial__pontuacao" data-searchable="false" data-sortable="true" data-halign="center" data-align="center" data-formatter="operateFormatter3">Psicosoc.</th>
+      <th data-field="escalaenfermagem__somatotal" data-searchable="false" data-sortable="true" data-halign="center" data-align="center" data-formatter="operateFormatter4">Enferm.</th>
+      <th data-field="escalafisioterapia__pontuacao" data-searchable="false" data-sortable="true" data-halign="center" data-align="center" data-formatter="operateFormatter7">Fisiote.</th>
+      <th data-field="id" data-searchable="false" data-formatter="operateFormatter5" data-halign="center" data-align="center">Dash</th>
     </tr>
   </thead>
 </table>
-
-
-
- 
-
-
-
 
 
 
@@ -144,7 +158,23 @@
   function operateFormatter6(value, row, index) {
     return [
       '<a href="/atualizarperfil/' + row.id +'" title="Editar Perfil de usuário">',
-      '<i class="fas fa-edit fa-2x"></i>',
+      '<i class="fas fa-edit fa-lg"></i>',
+      '</a>',
+    ].join('')
+  }
+
+
+  function operateFormatter7(value, row, index) {
+    return [
+    '<h4 class="text-center">',
+      + value,
+      '</h4>',
+      '<a class="remove" href="/escalafisioterapia/' + row.id +'" title="Escala Fisioterápica">',
+      '<i class="fas fa-walking fa-2x"></i>',
+      '</a>',
+      ' ',
+      '<a class="remove" href="/escalafisioterapiaresultado/' + row.id +'" title="Resultado da Escala Fisioterápica">',
+      '<i class="far fa-address-card fa-2x"></i>',
       '</a>',
     ].join('')
   }
