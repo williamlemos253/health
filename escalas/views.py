@@ -374,7 +374,7 @@ def escalasocial(request, id):
 @login_required
 def escalasocialresultado(request, id):
     resultado = Escalasocial.objects.filter(paciente=id).last()
-    usuario = Profile.objects.get(id=id)
+    usuario = Profile.objects.get(user=id)
     if resultado is None:
         return render (request, 'embranco.html')
 
@@ -388,12 +388,15 @@ def resumo(request, id):
     resultados = Escalamedica.objects.filter(paciente=id).last()
     resultadosocial = Escalasocial.objects.filter(paciente=id).last()
     resultadoenfermagem = Escalaenfermagem.objects.filter(paciente=id).last()
+    resultadofisioterapia = Escalafisioterapia.objects.filter(paciente=id).last()
+    pontosfisio = 6 - resultadofisioterapia.pontuacao
     usuario = Profile.objects.get(id=id)
 
     sexo = usuario.sexo
     idade = calculate_age(usuario.birth_date)
 
-    return render (request, 'resumo.html', {'resultadoenfermagem':resultadoenfermagem,'resultadosocial':resultadosocial, 'resultados': resultados, 'idade':idade, 'sexo': sexo })
+    return render (request, 'resumo.html', {'resultadofisioterapia':resultadofisioterapia, 'pontosfisio':pontosfisio, 'resultadoenfermagem':resultadoenfermagem, \
+    'resultadosocial':resultadosocial, 'resultados': resultados, 'idade':idade, 'sexo': sexo })
 
 
 
@@ -562,7 +565,6 @@ def escalafisioterapia(request, id):
                 total = total +1
         
           
-            total = total + int(escala.niveldor)
             escala.pontuacao = total
 
             escala.save()
@@ -582,13 +584,18 @@ def escalafisioterapia(request, id):
 @login_required
 def escalafisioterapiaresultado(request, id):
     resultado = Escalafisioterapia.objects.filter(paciente=id).last()
-    usuario = Profile.objects.get(id=id)
+    usuario = Profile.objects.get(user=id)
     if resultado is None:
         return render (request, 'embranco.html')
+        
 
     idade = calculate_age(usuario.birth_date)
 
-    return render (request, 'escalafisioterapiaresultado.html', {'resultado': resultado, 'idade':idade})
+    semproblemas = 6 - resultado.pontuacao
+
+    print ("aqui ", semproblemas, resultado)
+
+    return render (request, 'escalafisioterapiaresultado.html', {'resultado': resultado, 'idade':idade, 'semproblemas':semproblemas,})
 
 
 @login_required

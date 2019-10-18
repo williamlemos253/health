@@ -37,6 +37,8 @@ span.step {
                 <br>
             </div>
 
+
+        {# escala médica #}
             <div class="col-12 col-md-6 border">
              {% if resultados %}
                 <h4 class="text-center">Escala Médica</h4>
@@ -74,6 +76,7 @@ span.step {
                     <a href="/escalamedicaresultado/{{resultados.paciente.id}}" class="btn btn-outline-secondary" role="button">Ver completo</a>
                 </p>
                 <h5 class="text-center">Pontuação Total:&nbsp;<span class="step">{{ resultados.pontuacao }}</span></h5>
+                <h5 class="text-center">Índice de gravidade:&nbsp;<span class="step">{{ resultados.indgravidade|floatformat }}</span></h5>
                 <h4 class="text-center">Data/Hora: {{ resultados.datareg|date:"d/m/Y h:m" }} </h4>
             {% else %}
             <br>
@@ -85,7 +88,7 @@ span.step {
             </div>
         
            
-
+{# escala enfermagem #}
     <div class="col-12 col-md-6 border">
     {% if resultadoenfermagem %}
         <h4 class="text-center">Escala Enfermagem</h4>
@@ -121,6 +124,7 @@ span.step {
                 <a href="/escalaenfermagemresultado/{{resultadoenfermagem.paciente.id}}" class="btn btn-outline-secondary" role="button">Ver completo</a>
             </p>
         {# identifica o nível de complexidade asssitencial que o paciente necessita #}
+            <h5 class="text-center">Pontuação Total:&nbsp;<span class="step">{{ resultadoenfermagem.somatotal }}</span></h5>
             {% if resultadoenfermagem.somatotal <= 14 %}
             <h5 class="text-center fixaTamanho">O paciente necessita de cuidados <b class="alert alert-success">Mínimos</b></h5>
             {% elif resultadoenfermagem.somatotal <= 20 %}
@@ -146,7 +150,7 @@ span.step {
          {# inicio da escla psicosocial #}
 
             <div class="col-12 col-md-6 border">
-             {% if resultadoenfermagem %}
+             {% if resultadosocial %}
                 <h4 class="text-center">Escala Psicosocial</h4>
                 <canvas id="CirsgChart2" width="150" height="150"></canvas>
                 <script>
@@ -175,12 +179,13 @@ span.step {
                 </script>
                 <br>
                 <p class="text-center">
-                    <a href="/escalasocialresultado/{{resultados.paciente.id}}" class="btn btn-outline-secondary" role="button">Ver completo</a>
+                    <a href="/escalasocialresultado/{{resultadosocia.paciente.id}}" class="btn btn-outline-secondary" role="button">Ver completo</a>
                 </p>
+                <h5 class="text-center">Pontuação Total:&nbsp;<span class="step">{{ resultadosocial.pontuacao }}</span></h5>
                 <br>
-                <h6 class="text-center fixaTamanho">{% if resultado.pontuacao <= 6 %}
+                <h6 class="text-center fixaTamanho">{% if resultadosocial.pontuacao <= 6 %}
                                         <b class="alert alert-success">R1 - Risco menor </b>
-                                        {% elif resultado.pontuacao <= 9 %}
+                                        {% elif resultadosocial.pontuacao <= 9 %}
                                             <b class="alert alert-warning"> R2 - Risco médio</b>
                                         {% else %}
                                             <b class="alert alert-danger">R3 - Risco máximo </b>
@@ -196,12 +201,63 @@ span.step {
             {% endif %}
         </div>
 
+{# escala fisioterpia #}
+    <div class="col-12 col-md-6 text-center border">
+    {% if resultadofisioterapia %}
+        <h4 class="text-center">Escala Fisioterápica</h4>
+        <canvas id="CirsgChart4" width="200" height="200"></canvas>
+            <script>
+            // And for a doughnut chart
+            var ctx = document.getElementById("CirsgChart4").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                labels: ["Sem Dificuldades", "Dificuldades Funcionais"],
+                datasets: [{
+                    backgroundColor: [
+                    "#CCCCCC",
+                    "#CC3366",
+                    ],
+                    data: [ {{pontosfisio}},  {{resultadofisioterapia.pontuacao}}]
+                }]
+                 },
+                        options: {
+                        title: {
+                            display: true,
+                            text: 'Nº de problemas funcionais'
+                        }
+
+                        }
+                });
+            </script>
+            <br>
+                <p class="text-center">
+                    <a href="/escalafisioterapiaresultado/{{resultadofisioterapia.paciente.id}}" class="btn btn-outline-secondary" role="button">Ver completo</a>
+                </p>
+            <br>
+        <h5 class="text-center">Pontuação Total:&nbsp;<span class="step">{{ resultadofisioterapia.pontuacao }}</span></h5>
+        {% if resultadofisioterapia.niveldor <= 3 %} 
+          <h5>Nível de dor:&nbsp;<span class="step">{{ resultadofisioterapia.niveldor }}</span></h5>
+        {% elif resultadofisioterapia.niveldor <= 7 %}
+           <h5>Nível de dor:&nbsp;<span style="background: #FF8C00;" class="step">{{ resultadofisioterapia.niveldor }}</span></h5>
+        {% else %}
+           <h5>Nível de dor:&nbsp;<span style="background: #B22222;" class="step">{{ resultadofisioterapia.niveldor }}</span></h5>
+        {% endif %}
+        <h4 class="text-center">Data/Hora: {{ resultadofisioterapia.datareg|date:"d/m/Y h:m" }} </h4>
+    {% else %}
+        <br>
+            <h5 class="text-center">A Escala Fisioterápica ainda não foi preenchida</h5>
+        <br>
+    {% endif %}
+    </div>
+
 
 
 
 
 
     </div>
+    <br>
     <br>
 
 {% endblock %}

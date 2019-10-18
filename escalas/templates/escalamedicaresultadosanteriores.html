@@ -16,7 +16,7 @@
         {% for resultado in resultados %} 
         <tr>
             <td>{{ resultado.medico }}</td>
-            <td><a data-toggle="tooltip" title="Visualizar" href="/escalamedicafiltrada/{{ resultado.id }}">{{ resultado.datareg|date:"d/m/Y h:m" }}</a></td>
+            <td><a data-toggle="tooltip" title="Visualizar" href="/escalagisioterapiafiltrada/{{ resultado.id }}">{{ resultado.datareg|date:"d/m/Y h:m" }}</a></td>
            
         </tr>
         {% endfor %}

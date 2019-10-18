@@ -42,7 +42,6 @@ def declaracaodesaude(request):
         if request.method == "POST":
             form = DeclaracaodesaudeForm(request.POST)
             print (request.POST)
-            print ("passou por aqui")
             if form.is_valid():
                 declaracao = form.save(commit=False)
 
